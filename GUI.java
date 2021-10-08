@@ -13,13 +13,13 @@ public class GUI implements ActionListener{
   
 
 //trying gui with image
-  public GUI() 
+  public GUI(String image, String message, String title) 
   {
    //creating new objects of type frame and panel and button
     frame = new JFrame();
-    icon = new ImageIcon("majestic_bear.jpg");
+    icon = new ImageIcon(image);
     label = new JLabel(icon);
-    label2 = new JLabel("sup ma boy");
+    label2 = new JLabel(message);
 
 
     panel = new JPanel();
@@ -42,7 +42,7 @@ public class GUI implements ActionListener{
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     //title
-    frame.setTitle("Gui");
+    frame.setTitle(title);
 
     //set window to match certain size
     frame.pack();
@@ -65,7 +65,7 @@ public class GUI implements ActionListener{
   
   public static void main (String[] args)
   {
-    new GUI();
+    new GUI("majestic_bear.jpg","hello there matey", "test");
 
 
   }
