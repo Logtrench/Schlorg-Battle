@@ -1,24 +1,53 @@
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
+import java.awt.*;
 
 class Main {
-  public static void main(String[] args) {
-    JFrame frame = new JFrame("Schlorganrt");
-    frame.setSize(300, 300);
-    frame.setLocation(100, 100);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  public static void main(String[] args) 
+  {
+    if(again())
+    {
+      play();
+    }else{
+      exit();
+    }
 
-
-String bitte = "bitteschön und dankeschön";
-    JLabel label = new JLabel(bitte,SwingConstants.CENTER);
-    frame.add(label);
-
-    frame.show();
-    
-    System.out.println(bitte);
+    GUI.main(args);
   }
+
+  public static boolean again()
+  {
+
+    
+    return true;
+
+
+  }
+
+  public static void play()
+  {
+      String[] ba = {"1","2"};
+      //Inputs.main(ba);
+
+      
+      System.out.println("yayy");
+  }
+
+  public static void exit()
+  {
+      System.out.println("byeee mofo");
+  }
+  
+  public static String input(String question)
+  {
+    
+
+    return "baba";
+  }
+
 }
+
+
+
 
 /*
 manifesto
