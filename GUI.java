@@ -8,21 +8,19 @@ public class GUI implements ActionListener{
   private JFrame frame;
   private JPanel panel;
   private JLabel label;
-  private JLabel label2;
-  private ImageIcon icon;
   
 
-//trying gui with image
+  //default method
   public GUI() 
   {
-   //creating new objects of type frame and panel and button
+    //creating new objects of type frame and panel and button
     frame = new JFrame();
-    icon = new ImageIcon("majestic_bear.jpg");
-    label = new JLabel(icon);
-    label2 = new JLabel("sup ma boy");
+    JButton button = new JButton("Click me");
+    label = new JLabel("Number of clicks: " + count);
+    button.addActionListener(this);
 
 
-    panel = new JPanel();
+    JPanel panel = new JPanel();
 
     //setting border of panel ()
     panel.setBorder(BorderFactory.createEmptyBorder(100, 200, 50, 70));
@@ -34,9 +32,10 @@ public class GUI implements ActionListener{
     //add panel to frame
     frame.add(panel, BorderLayout.CENTER);
 
+    //add button
+    panel.add(button);
     //add  label
     panel.add(label);
-    panel.add(label2);
 
     //set closing behaviour
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
