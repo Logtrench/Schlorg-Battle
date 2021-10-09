@@ -3,6 +3,112 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.*;
+import java.awt.event.*;
+
+public class GUI implements ActionListener
+{
+    private static JLabel success;
+    private static JTextField userText;
+    private static JTextField passwordText;
+    private static ImageIcon icon;
+    private static JLabel label;
+    
+    public static void main(String[] args)
+    {
+        /*JPanel panel = new JPanel();
+        JFrame frame = new JFrame();
+        frame.setSize(500, 500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.add(panel);*/
+        JPanel panel = new JPanel();
+        panel = panel(500, 500);
+        
+
+        icon = new ImageIcon("images/bear.png");
+        image(panel, icon, 10, 120, 250, 250);
+        
+
+        //label = new JLabel(icon);
+        //label.setBounds(10, 120, 80, 25);
+        //panel.add(label);
+
+        panel.setLayout(null);
+        
+        labl(panel, "User",10,20, 80, 25);
+        userText = text(panel,100,20,165,25);
+        
+        labl(panel, "Password",10,50,80,25);
+        passwordText = text(panel,100,50,165,25);
+        
+        JButton button1 = new JButton();
+        button1 = butt(panel, "log in", 10,80,80,25);
+        button1.setVisible(true);
+        button1.addActionListener(new GUI());
+        success = new JLabel("");
+        success.setBounds(10,110,300,25);
+        panel.add(success);
+                       
+    }
+    
+    public static JPanel panel(int x, int y)
+    {
+        JPanel panel = new JPanel();
+        JFrame frame = new JFrame();
+        frame.setSize(x, y);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.add(panel);
+        return panel;
+    }
+
+    public static void labl(JPanel panel, String message, int x, int y, int zx, int zy)
+    {
+        JLabel label = new JLabel(message);
+        label.setBounds(x, y, zx, zy);
+        panel.add(label);
+    }
+
+    public static void image(JPanel panel, ImageIcon icon, int x, int y, int zx, int zy)
+    {
+        JLabel label = new JLabel(icon);
+        label.setBounds(x, y, zx, zy);
+        panel.add(label);
+    }
+    
+    public static JTextField text(JPanel panel, int x, int y, int zx, int zy)
+    {
+        JTextField userText = new JTextField(20);
+        userText.setBounds(x,y,zx,zy);
+        panel.add(userText);
+        return userText;
+    }
+    
+    public static JButton butt(JPanel panel, String message, int x, int y, int zx, int zy)
+    {
+        JButton button = new JButton(message);
+        button.setBounds(x,y,zx,zy);
+        panel.add(button);
+        return button;
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) 
+    {
+        System.out.println("yo");
+    }
+}
+
+
+
+
+
+
+
+
+/*
+
 public class GUI implements ActionListener{
   private int count = 0;
   private JFrame frame;
@@ -72,3 +178,4 @@ public class GUI implements ActionListener{
 
 
 }
+*/

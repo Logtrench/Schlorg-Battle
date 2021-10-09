@@ -10,8 +10,6 @@ class Main {
     }else{
       exit();
     }
-
-    GUI.main(args);
   }
 
   public static boolean again()
@@ -25,6 +23,23 @@ class Main {
 
   public static void play()
   {
+    JPanel panel = new JPanel();
+    ImageIcon icon = new ImageIcon("images/bear.png");
+
+    panel = GUI.panel(500, 500);
+    GUI.labl(panel, "Battle for Schlorg", 50, 10, 25, 50);
+
+    JButton join = new JButton();
+    join = GUI.butt(panel, "join", 100, 100, 100, 100);
+    join.addActionListener(new GUI());
+    JButton exit = new JButton();
+    exit = GUI.butt(panel, "exit", 100, 100, 100, 100);
+    exit.addActionListener(new GUI());
+    
+        //image(panel, icon, 10, 120, 250, 250);
+    //GUI.image(panel, icon, 100, 120, 250, 250);
+      
+      
       String[] ba = {"1","2"};
       //Inputs.main(ba);
 
