@@ -23,6 +23,8 @@ class Main {
 
   public static void play()
   {
+    
+    
     JPanel panel = new JPanel();
     ImageIcon icon = new ImageIcon("images/bear.png");
 

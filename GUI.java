@@ -96,7 +96,20 @@ public class GUI implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e) 
     {
-        System.out.println("yo");
+        String buttonName = e.getActionCommand();
+        if (buttonName.equals("join"))
+        {
+          System.out.println("JOINING");
+        }
+        else if (buttonName.equals("exit"))
+        {
+          Main.exit();
+          System.exit(0);
+        }
+        else
+        {
+          System.out.println("AHHH");
+        }
     }
 }
 
