@@ -2,57 +2,45 @@ import javax.swing.*;
 import java.awt.*;
 
 class Main {
+  
+  //The over all game within a loop
   public static void main(String[] args) {
+    
+    //if user wants to play again, play, if not, exit
     if (again()) {
       play();
     } else {
       exit();
     }
+    //loop all above
+    
   }
 
   public static boolean again() {
 
+    //TO be filled in, atm it is always true;
     return true;
 
   }
 
   public static void play() {
 
-    GridLayout OneByOne = new GridLayout(0, 1, 3, 10);
-
-    JPanel panel = new JPanel();
-    ImageIcon icon = new ImageIcon("images/bear.png");
-
-    panel = GUI.panel(250, 250);
-    panel.setLayout(OneByOne);
-    panel.setBackground(Color.green);
-
-    GUI.labl(panel, "Battle for Schlorg", 10, 25, 50, 10);
-
-    JButton join = new JButton();
-    join = GUI.butt(panel, "join", 25, 25, 25, 25);
-    join.setBackground(Color.YELLOW);
-    join.setForeground(Color.BLACK);
-    join.addActionListener(new GUI());
-    JButton exit = new JButton();
-    exit = GUI.butt(panel, "exit", 25, 25, 25, 25);
-    exit.addActionListener(new GUI());
-
-    // image(panel, icon, 10, 120, 250, 250);
-    // GUI.image(panel, icon, 100, 120, 250, 250);
-
-    String[] ba = { "1", "2" };
-    // Inputs.main(ba);
-
-    System.out.println("yayy");
+    //a clean navigation of every panel. should call each panel after each other to show the flow fo the game. (with ifs and whiles to find out where the use wants to go, such as the shop)
+    
+    GUI.Menu();
   }
 
   public static void exit() {
+    
+    //simply print the exit message and exit the system.
     System.out.println("byeee mofo");
+    System.exit(0);
+
   }
 
   public static String input(String question) {
-
+      //Will delete this later, inputs has been replaced by GUI I think.
+    
     return "baba";
   }
 

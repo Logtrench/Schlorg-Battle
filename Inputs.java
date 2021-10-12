@@ -3,7 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Inputs{
-  private static JFrame frame; 
+  private static JFrame menu; 
   private static JPanel myPanel; //for buttons
   private JButton button1;
   private JButton button2;
@@ -33,16 +33,16 @@ private class Listen implements ActionListener
         String buttonName = e.getActionCommand();
         if (buttonName.equals("Start"))
         {
-          JOptionPane.showMessageDialog(frame, "Starting!");
+          JOptionPane.showMessageDialog(menu, "Starting!");
         }
         else if (buttonName.equals("Quit"))
         {
-          JOptionPane.showMessageDialog(frame, "Bye mofo");
+          JOptionPane.showMessageDialog(menu, "Bye mofo");
           System.exit(0);
         }
         else
         {
-          JOptionPane.showMessageDialog(frame, "What did you do?");
+          JOptionPane.showMessageDialog(menu, "What did you do?");
         }
       }
 }
@@ -50,16 +50,16 @@ private class Listen implements ActionListener
 public static void main(String s[])
 {
     Inputs gui = new Inputs(); //New Simple1 component
-    frame = new JFrame("Menu"); //New JFrame
+    menu = new JFrame("Menu"); //New JFrame
     //Common methods for handling closure events
-    frame.addWindowListener(new WindowAdapter() {
+    menu.addWindowListener(new WindowAdapter() {
       public void windowClosing(WindowEvent e)
       {
         System.exit(0);
       } 
     });
 
-    frame.getContentPane().add(myPanel);
-    frame.pack(); 
-    frame.setVisible(true);
+    menu.getContentPane().add(myPanel);
+    menu.pack(); 
+    menu.setVisible(true);
 }}

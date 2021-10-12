@@ -14,9 +14,9 @@ class gui {
     public static void main(String args[]) {
 
         //Creating the Frame
-        JFrame frame = new JFrame("Chat Frame");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 400);
+        JFrame menu = new JFrame("Chat Frame");
+        menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        menu.setSize(400, 400);
 
         //Creating the MenuBar and adding components
         JMenuBar mb = new JMenuBar();
@@ -44,9 +44,9 @@ class gui {
         JTextArea ta = new JTextArea();
 
         //Adding Components to the frame.
-        frame.getContentPane().add(BorderLayout.SOUTH, panel);
-        frame.getContentPane().add(BorderLayout.NORTH, mb);
-        frame.getContentPane().add(BorderLayout.CENTER, ta);
-        frame.setVisible(true);
+        menu.getContentPane().add(BorderLayout.SOUTH, panel);
+        menu.getContentPane().add(BorderLayout.NORTH, mb);
+        menu.getContentPane().add(BorderLayout.CENTER, ta);
+        menu.setVisible(true);
     }
 }
