@@ -46,18 +46,15 @@ class Main {
       GUI.introPanel.setVisible(false);
       //set other stuff like shop to false.
       //slide 3
-      //GUI.Fight();
+      GUI.Fight();
     }else 
     {
 
     }
-
-    
-
-
     
     //slide 4
     //GUI.Shop();
+      //only increase damage and increase health
 
     //slide 5
     //GUI.BearWin();
