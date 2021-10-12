@@ -36,18 +36,25 @@ class Main {
     GUI.Menu();
     } else if (slide == 2)
     {
+      GUI.menuPanel.setVisible(false);
+
       //introPanel.setVisible(true);
       //slide 2
       GUI.Intro();
-    }else
+    }else if (slide ==3)
     {
-      
+      GUI.introPanel.setVisible(false);
+      //set other stuff like shop to false.
+      //slide 3
+      //GUI.Fight();
+    }else 
+    {
+
     }
 
     
 
-    //slide 3
-    //GUI.Fight();
+
     
     //slide 4
     //GUI.Shop();

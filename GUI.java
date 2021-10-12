@@ -20,8 +20,8 @@ public class GUI implements ActionListener {
   public static JFrame mainFrame = new JFrame();
 
   //All the panels that ned to be accessed by the button actions.
-  private static JPanel menuPanel = new JPanel();
-  private static JPanel introPanel = new JPanel();
+  public static JPanel menuPanel = new JPanel();
+  public static JPanel introPanel = new JPanel();
 
   public static void main(String[] args) {
     /*
@@ -109,12 +109,16 @@ public class GUI implements ActionListener {
     String buttonName = e.getActionCommand();
     if (buttonName.equals("join")) {
       System.out.println("JOINING");
-      menuPanel.setVisible(false);
       Main.slide = 2;
       Main.play();
     } else if (buttonName.equals("exit")) {
       Main.exit();
       System.exit(0);
+    } else if (buttonName.equals("next")) {
+      //should I make an array of panel methods
+      
+      Main.slide++;
+      Main.play();
     } else {
       System.out.println("AHHH");
     }
