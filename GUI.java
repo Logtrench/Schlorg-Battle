@@ -21,6 +21,7 @@ public class GUI implements ActionListener {
 
   //All the panels that ned to be accessed by the button actions.
   private static JPanel menuPanel = new JPanel();
+  private static JPanel introPanel = new JPanel();
 
   public static void main(String[] args) {
     /*
@@ -73,7 +74,7 @@ public class GUI implements ActionListener {
 
   //easy label creator
   public static void labl(JPanel panel, String message, int x, int y, int zx, int zy) {
-    JLabel label = new JLabel(message);
+    JLabel label = new JLabel(message,SwingConstants.CENTER);
     label.setBounds(x, y, zx, zy);
     panel.add(label);
   }
@@ -109,7 +110,8 @@ public class GUI implements ActionListener {
     if (buttonName.equals("join")) {
       System.out.println("JOINING");
       menuPanel.setVisible(false);
-      //introPanel.setVisible(true);
+      Main.slide = 2;
+      Main.play();
     } else if (buttonName.equals("exit")) {
       Main.exit();
       System.exit(0);
@@ -142,9 +144,32 @@ public class GUI implements ActionListener {
 
     // image(panel, icon, 10, 120, 250, 250);
     // GUI.image(panel, icon, 100, 120, 250, 250);
+  }
 
-    String[] ba = { "1", "2" };
-    // Inputs.main(ba);
+  public static void Intro() {
+
+    GridLayout OneByOne = new GridLayout(0, 1, 3, 10);
+
+    introPanel = GUI.panel(mainFrame, 500, 500);
+    introPanel.setLayout(OneByOne);
+    introPanel.setBackground(Color.green);
+
+    GUI.labl(introPanel, "You\'ve been tasked by the king "
+, 10, 25, 50, 10);
+GUI.labl(introPanel, "to scout out the forest in order to burn it down for farmland. "
+, 10, 25, 50, 10);
+GUI.labl(introPanel, "On the way, you meet a bear, a magical bear which is the guardian"
+, 10, 25, 50, 10);
+GUI.labl(introPanel, "of the forest. You must defeat the bear to fulfill your mission."
+, 10, 25, 50, 10);
+
+// / 
+
+    JButton join = new JButton();
+    join = GUI.butt(introPanel, "next", 25, 25, 25, 25);
+    join.setBackground(Color.YELLOW);
+    join.setForeground(Color.BLACK);
+    join.addActionListener(new GUI());
   }
 }
 
