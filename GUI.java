@@ -23,7 +23,6 @@ public class GUI implements ActionListener {
 
   public static void main(String[] args) {
     // not used
-
   }
 
   // easy panel creator
@@ -108,7 +107,7 @@ public class GUI implements ActionListener {
     GUI.labl(menuPanel, "Battle for Schlorg", 10, 25, 50, 10);
 
     JButton join = new JButton();
-    join = GUI.butt(menuPanel, "join", 25, 25, 25, 25);
+    join = GUI.butt(menuPanel, "next", 25, 25, 25, 25);
     join.setBackground(Color.YELLOW);
     join.setForeground(Color.BLACK);
     join.addActionListener(new GUI());
