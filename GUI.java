@@ -75,19 +75,23 @@ public class GUI implements ActionListener {
       Main.play();
     } else if (buttonName.equals("exit")) {
       Main.exit();
-      System.exit(0);
     } else if (buttonName.equals("next")) {
       Main.slide++;
       Main.play();
     } else if (buttonName.equals("attack")) {
-      // Main.attack();
+      attackWindow();
+      Main.you.attack();
+
+      //should attack bring up a new window showing health and damage?
       System.out.println("you monster");
-      Main.slide = 4;
+
+      //does not change slide, you can attack or shop again.
+      Main.slide = 3;
       Main.play();
     } else if (buttonName.equals("shop")) {
 
       System.out.println("less gooo");
-      Main.slide = 5;
+      Main.slide = 4;
       Main.play();
     } else {
       System.out.println("AHHH");
@@ -166,56 +170,30 @@ public class GUI implements ActionListener {
     shop.setForeground(Color.BLACK);
     shop.addActionListener(new GUI());
   }
-}
 
-/*
- * 
- * public class GUI implements ActionListener{ private int count = 0; private
- * JFrame frame; private JPanel panel; private JLabel label; private JLabel
- * label2; private ImageIcon icon;
- * 
- * 
- * //trying gui with image public GUI(String image, String message, String
- * title) { //creating new objects of type frame and panel and button frame =
- * new JFrame(); icon = new ImageIcon(image); label = new JLabel(icon); label2 =
- * new JLabel(message);
- * 
- * 
- * panel = new JPanel();
- * 
- * //setting border of panel ()
- * panel.setBorder(BorderFactory.createEmptyBorder(100, 200, 50, 70));
- * 
- * //making layout, aka panel.setLayout(new GridLayout(0, 1));
- * 
- * 
- * //add panel to frame frame.add(panel, BorderLayout.CENTER);
- * 
- * //add label panel.add(label); panel.add(label2);
- * 
- * //set closing behaviour frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- * 
- * //title frame.setTitle(title);
- * 
- * //set window to match certain size frame.pack();
- * 
- * //make it visible. frame.setVisible(true);
- * 
- * 
- * }
- * 
- * 
- * 
- * @Override public void actionPerformed(ActionEvent e) { count++;
- * label.setText("Number of clicks: " + count); }
- * 
- * 
- * public static void main (String[] args) { new
- * GUI("majestic_bear.jpg","hello there matey", "test");
- * 
- * 
- * }
- * 
- * 
- * }
- */
+  public static void attackWindow() {
+
+    GridLayout OneByOne = new GridLayout(0, 2, 0, 10);
+    JFrame attackFrame = new JFrame();
+
+
+    menuPanel = GUI.panel(attackFrame, 250, 250);
+    menuPanel.setLayout(OneByOne);
+    menuPanel.setBackground(Color.green);
+
+    //set titles
+    GUI.labl(menuPanel, "You", 10, 25, 50, 10);
+    GUI.labl(menuPanel, "Bear", 10, 25, 50, 10);
+
+    GUI.labl(menuPanel, "Took 1 damage", 10, 25, 50, 10);
+    GUI.labl(menuPanel, "Took " + Main.you.getDamage() + " damage", 10, 25, 50, 10);
+
+    GUI.labl(menuPanel, "Health: " + Main.you.getHealth(), 10, 25, 50, 10);
+    GUI.labl(menuPanel, "Health: " + Main.you.getBearHealth(), 10, 25, 50, 10);
+
+    
+
+    // image(panel, icon, 10, 120, 250, 250);
+    // GUI.image(panel, icon, 100, 120, 250, 250);
+  }
+}

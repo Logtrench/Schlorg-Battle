@@ -5,6 +5,7 @@ class Main {
 
   // The way in which the game knows which panel to be on.
   public static int slide = new Integer(1);
+  public static Player you = new Player();
 
   // The over all game within a loop
   public static void main(String[] args) {
@@ -75,7 +76,6 @@ class Main {
   }
 
   public static void exit() {
-
     // simply print the exit message and exit the system.
     System.out.println("byeee mofo");
     System.exit(0);
