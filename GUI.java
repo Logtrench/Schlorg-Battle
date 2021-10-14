@@ -122,10 +122,12 @@ public class GUI implements ActionListener {
     } else if (buttonName.equals("Join")) {
       Main.slide = 7;
       Main.play();
-      }else if (buttonName.equals("Finish")){
-        Main.slide = 9;
-        Main.play();
-      } else {
+    } else if (buttonName.equals("Finish")) {
+      Main.slide = 9;
+      Main.play();
+    } else if (buttonName.equals("Enable Cheats")) {
+      Main.you.setDamage(999);
+    } else {
       System.out.println("AHHH");
     }
   }
@@ -148,6 +150,13 @@ public class GUI implements ActionListener {
     JButton exit = new JButton();
     exit = GUI.butt(menuPanel, "exit", 25, 25, 25, 25);
     exit.addActionListener(new GUI());
+
+    JButton cheat = new JButton();
+    cheat = GUI.butt(menuPanel, "Enable Cheats", 25, 25, 25, 25);
+    cheat.setForeground(Color.blue);
+    cheat.addActionListener(new GUI());
+
+    // Make a button called enable cheats.
 
     // image(panel, icon, 10, 120, 250, 250);
     // GUI.image(panel, icon, 100, 120, 250, 250);
@@ -373,7 +382,7 @@ public class GUI implements ActionListener {
     next.addActionListener(new GUI());
   }
 
-    public static void end() {
+  public static void end() {
 
     GridLayout OneByOne = new GridLayout(0, 1, 0, 10);
 
