@@ -51,11 +51,11 @@ public class Player {
   }
 
   public void setHealth(int x) {
-    this.health += x;
+    this.health = x;
   }
 
   public void setDamage(int x) {
-    this.damage += x;
+    this.damage = x;
   }
   public int getGold(){
     return this.gold;

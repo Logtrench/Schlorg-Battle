@@ -11,6 +11,8 @@ public class GUI implements ActionListener {
   // A lot of these variables were for learning GUI, they will be replaced with
   // needed variabes
 
+  //the toggle variable for cheats
+  int toggle = 1;
   // The frame to be used by All
   public static JFrame mainFrame = new JFrame();
 
@@ -72,6 +74,7 @@ public class GUI implements ActionListener {
   // how the program deals with inputs from buttons
   @Override
   public void actionPerformed(ActionEvent e) {
+    
     String buttonName = e.getActionCommand();
     if (buttonName.equals("join")) {
       System.out.println("JOINING");
@@ -126,7 +129,18 @@ public class GUI implements ActionListener {
       Main.slide = 9;
       Main.play();
     } else if (buttonName.equals("Enable Cheats")) {
-      Main.you.setDamage(999);
+      toggle = toggle *(-1);
+      
+      if(toggle == -1)
+      {
+        Main.you.setDamage(999);
+        System.out.print("enabled!");
+      }
+      if (toggle == 1){
+        Main.you.setDamage(2);
+        System.out.print("disabled!");
+      }
+      
     } else {
       System.out.println("AHHH");
     }
