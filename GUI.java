@@ -234,10 +234,18 @@ public class GUI implements ActionListener {
     GUI.labl(statPanel, "Bear", 10, 25, 50, 10);
 
 
-    //maybe have it so it does an if else statement, and a variable for how many times attacked was clicked?
+    //checks if bear health and your health are unchanged.
 
+    if(Main.you.getBearHealth()!=30&&Main.you.getHealth()!=10)
+    {
     GUI.labl(statPanel, "Took " + Main.you.getBearDamage() + " damage", 10, 25, 50, 10);// You
     GUI.labl(statPanel, "Took " + Main.you.getDamage() + " damage", 10, 25, 50, 10);// Bear
+    }else {
+      GUI.labl(statPanel, "Hint: earn gold", 10, 25, 50, 10);// You
+   GUI.labl(statPanel, " when damaged", 10, 25, 50, 10);
+      //Bear
+    }
+
 
     GUI.labl(statPanel, "Health: " + Main.you.getHealth(), 10, 25, 50, 10);
     GUI.labl(statPanel, "Health: " + Main.you.getBearHealth(), 10, 25, 50, 10);
