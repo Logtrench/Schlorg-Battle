@@ -34,11 +34,14 @@ class Main {
     // wants to go, such as the shop)
     switch (slide) {
       case 1:
-        // slide 1
+        // slide
+
         GUI.Menu();
         break;
       case 2:
         GUI.menuPanel.setVisible(false);
+        GUI.defeatPanel.setVisible(false);
+        GUI.endPanel.setVisible(false);
 
         // introPanel.setVisible(true);
         // slide 2
@@ -46,27 +49,41 @@ class Main {
         break;
       case 3:
         GUI.introPanel.setVisible(false);
+
         // set other stuff like shop to false.
         // slide 3
         GUI.Fight();
         break;
       case 4:
-        // slide 4
-        // GUI.Shop();
+        GUI.fightPanel.setVisible(false);
+        GUI.shop();
         // only increase damage and increase health
         break;
       case 5:
-        // slide 5
+        GUI.introPanel.setVisible(false);
+        GUI.fightPanel.setVisible(false);
         // GUI.BearWin();
+        GUI.lose();
         break;
       case 6:
         // slide 6
-        // GUI.KingEnd();
+        GUI.choicePanel.setVisible(false);
+        GUI.KingEnd();
         break;
       case 7:
         // slide 7
-        // GUI.ForestEnd();
+        GUI.choicePanel.setVisible(false);
+        GUI.BearEnd();
         break;
+      case 8:
+        // slide 8
+        GUI.fightPanel.setVisible(false);
+        GUI.Choice();
+        break;
+      case 9:
+      GUI.joinPanel.setVisible(false);
+      GUI.refusePanel.setVisible(false);
+      GUI.end();
       default:
         System.out.println("default was called in play() this should not have happened");
         break;
@@ -80,12 +97,6 @@ class Main {
     System.out.println("byeee mofo");
     System.exit(0);
 
-  }
-
-  public static String input(String question) {
-    // Will delete this later, inputs has been replaced by GUI I think.
-
-    return "baba";
   }
 
 }
