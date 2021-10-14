@@ -439,6 +439,15 @@ public class GUI implements ActionListener {
 
   public static void end() {
 
+    //resetting gold and damage and health if the user wants to play again.
+    Main.you.setGold(5);
+    Main.you.setHealth(10);
+    Main.you.setDamage(2);
+    Main.you.setBearHealth(30);
+    //resetting cheats to disabled
+    toggle = -1;
+    cheat = "disabled!";
+
     GridLayout OneByOne = new GridLayout(0, 1, 0, 10);
 
     endPanel = GUI.panel(mainFrame, 400, 500);

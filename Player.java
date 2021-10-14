@@ -17,28 +17,10 @@ public class Player {
 
     if (health <= 0 && bearHealth <= 0) {
       Main.slide = 10;
-      // Resets health and damage just in case they would like to play again
-      health = 10;
-      damage = 2;
-      bearHealth = 30;
-      gold = 5;
-    }
-    
-    if (health <= 0) {
+    } else if (health <= 0) {
       Main.slide = 5;
-      // Resets health and damage just in case they would like to play again
-      health = 10;
-      damage = 2;
-      bearHealth = 30;
-      gold = 5;
-    }
-    if (bearHealth <= 0) {
+    } else if (bearHealth <= 0) {
       Main.slide = 8;
-      // Resets health and damage just in case they would like to play again
-      health = 10;
-      damage = 2;
-      bearHealth = 30;
-      gold = 4;// idk bug?
     }
 
   }
@@ -53,6 +35,10 @@ public class Player {
 
   public int getBearHealth() {
     return this.bearHealth;
+  }
+  
+  public void setBearHealth(int x){
+    this.bearHealth = x;
   }
 
   public int getDamage() {
