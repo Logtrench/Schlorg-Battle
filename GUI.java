@@ -25,6 +25,7 @@ public class GUI implements ActionListener {
   public static JPanel joinPanel = new JPanel();
   public static JPanel refusePanel = new JPanel();
   public static JPanel endPanel = new JPanel();
+  public static JPanel diePanel = new JPanel();
 
   public static void main(String[] args) {
     // not used
@@ -405,6 +406,32 @@ public class GUI implements ActionListener {
 
     JButton next = new JButton();
     next = GUI.butt(joinPanel, "Finish", 25, 25, 25, 25);
+    next.setBackground(Color.YELLOW);
+    next.setForeground(Color.BLACK);
+    next.addActionListener(new GUI());
+  }
+
+  public static void BothLose() {
+
+    GridLayout OneByOne = new GridLayout(0, 1, 3, 10);
+
+    diePanel = GUI.panel(mainFrame, 700, 500);
+    diePanel.setLayout(OneByOne);
+    diePanel.setBackground(Color.green);
+
+    GUI.labl(diePanel, "You’ve failed the king’s task.", 10, 25, 50, 10);
+    GUI.labl(diePanel, "Both you and the bear have died", 10, 25, 50, 10);
+    GUI.labl(diePanel, "The king, not seeing your return, has", 10, 25, 50, 10);
+    GUI.labl(diePanel, "sent another scout who then accomplishes his task.", 10,
+        25, 50, 10);
+
+    GUI.labl(diePanel, "Within a century no one remembers you nor the bear.", 10, 25, 50, 10);
+
+    GUI.labl(diePanel, "Life goes on as normal", 10, 25, 50, 10);
+    // /
+
+    JButton next = new JButton();
+    next = GUI.butt(diePanel, "Finish", 25, 25, 25, 25);
     next.setBackground(Color.YELLOW);
     next.setForeground(Color.BLACK);
     next.addActionListener(new GUI());

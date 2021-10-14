@@ -85,7 +85,13 @@ class Main {
       case 9:
         GUI.joinPanel.setVisible(false);
         GUI.refusePanel.setVisible(false);
+        GUI.diePanel.setVisible(false);
         GUI.end();
+        break;
+        case 10:
+        GUI.fightPanel.setVisible(false);
+
+        GUI.BothLose();
         break;
       default:
         System.out.println("default was called in play() this should not have happened");

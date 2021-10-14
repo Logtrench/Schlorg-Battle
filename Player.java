@@ -15,6 +15,15 @@ public class Player {
     this.bearHealth -= this.damage;
     this.health -= this.bearDamage;
 
+    if (health <= 0 && bearHealth <= 0) {
+      Main.slide = 10;
+      // Resets health and damage just in case they would like to play again
+      health = 10;
+      damage = 2;
+      bearHealth = 30;
+      gold = 5;
+    }
+    
     if (health <= 0) {
       Main.slide = 5;
       // Resets health and damage just in case they would like to play again
