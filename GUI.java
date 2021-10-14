@@ -3,20 +3,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
-import java.awt.event.*;
-
 public class GUI implements ActionListener {
 
   // A lot of these variables were for learning GUI, they will be replaced with
   // needed variabes
 
-  //the toggle variable for cheats
-  int toggle = 1;
+  // the toggle variable for cheats
+  public static int toggle = 1;
+  public static String cheat = "disabled!";
   // The frame to be used by All
   public static JFrame mainFrame = new JFrame();
 
-  // All the panels that need to be accessed by the button actions.
+  // All the panels that need to be accessed by the button actions and set
+  // visible.
   public static JPanel menuPanel = new JPanel();
   public static JPanel introPanel = new JPanel();
   public static JPanel fightPanel = new JPanel();
@@ -74,7 +73,7 @@ public class GUI implements ActionListener {
   // how the program deals with inputs from buttons
   @Override
   public void actionPerformed(ActionEvent e) {
-    
+
     String buttonName = e.getActionCommand();
     if (buttonName.equals("join")) {
       System.out.println("JOINING");
@@ -114,7 +113,7 @@ public class GUI implements ActionListener {
 
     } else if (buttonName.equals("play again")) {
 
-      Main.slide = 2;
+      Main.slide = 1;
       Main.play();
 
     } else if (buttonName.equals("Refuse")) {
@@ -129,18 +128,25 @@ public class GUI implements ActionListener {
       Main.slide = 9;
       Main.play();
     } else if (buttonName.equals("Enable Cheats")) {
-      toggle = toggle *(-1);
-      
-      if(toggle == -1)
-      {
+      toggle = toggle * (-1);
+
+      if (toggle == -1) {
+        menuPanel.setVisible(false);
         Main.you.setDamage(999);
-        System.out.print("enabled!");
+        Main.you.setGold(999);
+        Main.you.setHealth(999);
+        cheat = "enabled!";
+        Main.play();
       }
-      if (toggle == 1){
+      if (toggle == 1) {
+        menuPanel.setVisible(false);
         Main.you.setDamage(2);
-        System.out.print("disabled!");
+        Main.you.setGold(5);
+        Main.you.setHealth(10);
+        cheat = "disabled!";
+        Main.play();
       }
-      
+
     } else {
       System.out.println("AHHH");
     }
@@ -150,11 +156,12 @@ public class GUI implements ActionListener {
 
     GridLayout OneByOne = new GridLayout(0, 1, 0, 10);
 
-    menuPanel = GUI.panel(mainFrame, 250, 250);
+    menuPanel = GUI.panel(mainFrame, 270, 270);
     menuPanel.setLayout(OneByOne);
     menuPanel.setBackground(Color.green);
 
     GUI.labl(menuPanel, "Battle for Schlorg", 10, 25, 50, 10);
+    GUI.labl(menuPanel, "Cheats " + cheat, 10, 25, 50, 10);
 
     JButton join = new JButton();
     join = GUI.butt(menuPanel, "Continue", 25, 25, 25, 25);
@@ -164,12 +171,14 @@ public class GUI implements ActionListener {
     JButton exit = new JButton();
     exit = GUI.butt(menuPanel, "exit", 25, 25, 25, 25);
     exit.addActionListener(new GUI());
+    exit.setForeground(Color.red);
 
     JButton cheat = new JButton();
     cheat = GUI.butt(menuPanel, "Enable Cheats", 25, 25, 25, 25);
     cheat.setForeground(Color.blue);
     cheat.addActionListener(new GUI());
 
+    menuPanel.setVisible(true);
     // Make a button called enable cheats.
 
     // image(panel, icon, 10, 120, 250, 250);
@@ -180,7 +189,7 @@ public class GUI implements ActionListener {
 
     GridLayout OneByOne = new GridLayout(0, 1, 3, 10);
 
-    introPanel = GUI.panel(mainFrame, 500, 500);
+    introPanel = GUI.panel(mainFrame, 500, 300);
     introPanel.setLayout(OneByOne);
     introPanel.setBackground(Color.green);
 
@@ -222,6 +231,9 @@ public class GUI implements ActionListener {
     // set titles
     GUI.labl(statPanel, "You", 10, 25, 50, 10);
     GUI.labl(statPanel, "Bear", 10, 25, 50, 10);
+
+
+    //maybe have it so it does an if else statement, and a variable for how many times attacked was clicked?
 
     GUI.labl(statPanel, "Took " + Main.you.getBearDamage() + " damage", 10, 25, 50, 10);// You
     GUI.labl(statPanel, "Took " + Main.you.getDamage() + " damage", 10, 25, 50, 10);// Bear
@@ -284,6 +296,7 @@ public class GUI implements ActionListener {
     JButton exit = new JButton();
     exit = GUI.butt(shopPanel, "exit", 25, 25, 25, 25);
     exit.addActionListener(new GUI());
+    exit.setForeground(Color.red);
 
     shopPanel.setVisible(true);
 
@@ -308,6 +321,7 @@ public class GUI implements ActionListener {
     JButton exit = new JButton();
     exit = GUI.butt(defeatPanel, "exit", 25, 25, 25, 25);
     exit.addActionListener(new GUI());
+    exit.setForeground(Color.red);
   }
 
   public static void Choice() {
@@ -331,7 +345,7 @@ public class GUI implements ActionListener {
     refuse.setForeground(Color.BLACK);
     refuse.addActionListener(new GUI());
 
-    GUI.labl(choicePanel, "Your about to slay the bear before he utters: ", 10, 25, 50, 10);
+    GUI.labl(choicePanel, "You're about to slay the bear before he utters: ", 10, 25, 50, 10);
     GUI.labl(choicePanel, "“You are a formidable foe", 10, 25, 50, 10);
     GUI.labl(choicePanel, "before I die I would like to ask you something… ", 10, 25, 50, 10);
     GUI.labl(choicePanel, "Would you like to join me to save nature", 10, 25, 50, 10);
@@ -377,7 +391,7 @@ public class GUI implements ActionListener {
     joinPanel.setBackground(Color.green);
 
     GUI.labl(joinPanel, "You’ve failed the king’s task.", 10, 25, 50, 10);
-    GUI.labl(joinPanel, "You’ve agreed to side with the bear than your duties. ", 10, 25, 50, 10);
+    GUI.labl(joinPanel, "You’ve agreed to side with the bear rather than your duties. ", 10, 25, 50, 10);
     GUI.labl(joinPanel, "You go on with the bear to revive the forest. Restoring all the destruction ", 10, 25, 50, 10);
     GUI.labl(joinPanel, "humans have caused to nature. You cannot return to your kingdom in fear of being punished", 10,
         25, 50, 10);
@@ -386,7 +400,7 @@ public class GUI implements ActionListener {
 
     GUI.labl(joinPanel, "You dedicate your life to protecting the forest with your combat skills.", 10, 25, 50, 10);
 
-    GUI.labl(joinPanel, "Along the way you  befriend other animals and adopt a new way of life.", 10, 25, 50, 10);
+    GUI.labl(joinPanel, "Along the way you befriend other animals and adopt a new way of life.", 10, 25, 50, 10);
     // /
 
     JButton next = new JButton();
@@ -415,6 +429,7 @@ public class GUI implements ActionListener {
     JButton exit = new JButton();
     exit = GUI.butt(endPanel, "exit", 25, 25, 25, 25);
     exit.addActionListener(new GUI());
+    exit.setForeground(Color.red);
 
     GUI.endPanel.setVisible(true);
   }

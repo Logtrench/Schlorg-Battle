@@ -35,6 +35,8 @@ class Main {
     switch (slide) {
       case 1:
         // slide
+        GUI.defeatPanel.setVisible(false);
+        GUI.endPanel.setVisible(false);
 
         GUI.Menu();
         break;
@@ -81,9 +83,10 @@ class Main {
         GUI.Choice();
         break;
       case 9:
-      GUI.joinPanel.setVisible(false);
-      GUI.refusePanel.setVisible(false);
-      GUI.end();
+        GUI.joinPanel.setVisible(false);
+        GUI.refusePanel.setVisible(false);
+        GUI.end();
+        break;
       default:
         System.out.println("default was called in play() this should not have happened");
         break;
