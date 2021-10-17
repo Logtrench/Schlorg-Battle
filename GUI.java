@@ -88,8 +88,9 @@ public class GUI implements ActionListener {
     } else if (buttonName.equals("attack")) {
       // System.out.println(Main.you.getBearHealth());
       Main.you.attack();
-      fightPanel.setVisible(false);
       Main.you.addGold(Main.you.getBearDamage());
+      fightPanel.setVisible(false);
+ 
 
       // now it calls on play if you died.
       Main.play();
@@ -210,45 +211,64 @@ public class GUI implements ActionListener {
 
   public static void Fight() {
     // Gridlayout(rows, columns, spacing between rows, spacing between columns)
-    GridLayout OneByOne = new GridLayout(0, 2, 3, 10);
+    GridLayout TwoCol = new GridLayout(0, 2, 3, 10);
+    GridLayout OneCol = new GridLayout(0, 1, 3, 10);
 
     JPanel statPanel = new JPanel();
+    JPanel youPanel = new JPanel();
+    JPanel bearPanel = new JPanel();
+    JPanel hintPanel1 = new JPanel();
+    JPanel hintPanel2 = new JPanel();
+
     fightPanel = new JPanel();
 
     fightPanel = GUI.panel(mainFrame, 500, 500);
-    fightPanel.setLayout(OneByOne);
+    fightPanel.setLayout(TwoCol);
     fightPanel.setBackground(Color.green);
 
     ImageIcon icon = new ImageIcon("Images/cute.png");
     image(fightPanel, icon, 10, 10, 10, 10);
 
     fightPanel.add(statPanel);
+    statPanel.add(youPanel);
+    statPanel.add(bearPanel);
+    
 
-    GridLayout TwoByOne = new GridLayout(0, 2, 0, 10);
+    statPanel.setLayout(TwoCol);
+    statPanel.setBackground(Color.WHITE);
 
-    statPanel.setLayout(TwoByOne);
-    statPanel.setBackground(Color.green);
+
+    //uses rgb values to create a colour
+    Color lightBlue = new Color(116,146,237);
+    Color lightRed = new Color(237,120,116);
+
+    youPanel.setLayout(OneCol);
+    bearPanel.setLayout(OneCol);
+    youPanel.setBackground(lightBlue);
+    bearPanel.setBackground(lightRed);
 
     // set titles
-    GUI.labl(statPanel, "You", 10, 25, 50, 10);
-    GUI.labl(statPanel, "Bear", 10, 25, 50, 10);
+    GUI.labl(youPanel, "You", 10, 25, 50, 10);
+    GUI.labl(bearPanel, "Bear", 10, 25, 50, 10);
 
+    // checks if bear health and your health are unchanged.
 
-    //checks if bear health and your health are unchanged.
+    if (Main.you.getBearHealth() != 30 && Main.you.getHealth() != 10) {
+      GUI.labl(youPanel, "Took " + Main.you.getBearDamage() + " damage", 10, 25, 50, 10);// You
+      GUI.labl(bearPanel, "Took " + Main.you.getDamage() + " damage", 10, 25, 50, 10);// Bear
+    } else {
 
-    if(Main.you.getBearHealth()!=30&&Main.you.getHealth()!=10)
-    {
-    GUI.labl(statPanel, "Took " + Main.you.getBearDamage() + " damage", 10, 25, 50, 10);// You
-    GUI.labl(statPanel, "Took " + Main.you.getDamage() + " damage", 10, 25, 50, 10);// Bear
-    }else {
-      GUI.labl(statPanel, "Hint: earn gold", 10, 25, 50, 10);// You
-   GUI.labl(statPanel, " when damaged", 10, 25, 50, 10);
-      //Bear
+      // Bear
     }
 
+    GUI.labl(youPanel, "Health: " + Main.you.getHealth(), 10, 25, 50, 10);
+    GUI.labl(bearPanel, "Health: " + Main.you.getBearHealth(), 10, 25, 50, 10);
 
-    GUI.labl(statPanel, "Health: " + Main.you.getHealth(), 10, 25, 50, 10);
-    GUI.labl(statPanel, "Health: " + Main.you.getBearHealth(), 10, 25, 50, 10);
+
+    GUI.labl(hintPanel1, "Hint: earn gold", 10, 25, 50, 10);// You
+    GUI.labl(hintPanel2, " when damaged", 10, 25, 50, 10);
+    youPanel.add(hintPanel1);
+    bearPanel.add(hintPanel2);
 
     JButton attack = new JButton();
     attack = GUI.butt(fightPanel, "attack", 25, 25, 25, 25);
@@ -319,7 +339,7 @@ public class GUI implements ActionListener {
     defeatPanel.setLayout(OneByOne);
     defeatPanel.setBackground(Color.green);
 
-    GUI.labl(defeatPanel, "You suck", 10, 25, 50, 10);
+    GUI.labl(defeatPanel, "You suck cause you died haha", 10, 25, 50, 10);
     GUI.labl(defeatPanel, "Would you like to play again?", 10, 25, 50, 10);
 
     JButton play_again = new JButton();
@@ -430,8 +450,7 @@ public class GUI implements ActionListener {
     GUI.labl(diePanel, "You’ve failed the king’s task.", 10, 25, 50, 10);
     GUI.labl(diePanel, "Both you and the bear have died", 10, 25, 50, 10);
     GUI.labl(diePanel, "The king, not seeing your return, has", 10, 25, 50, 10);
-    GUI.labl(diePanel, "sent another scout who then accomplishes his task.", 10,
-        25, 50, 10);
+    GUI.labl(diePanel, "sent another scout who then accomplishes his task.", 10, 25, 50, 10);
 
     GUI.labl(diePanel, "Within a century no one remembers you nor the bear.", 10, 25, 50, 10);
 
@@ -447,13 +466,13 @@ public class GUI implements ActionListener {
 
   public static void end() {
 
-    //resetting gold and damage and health if the user wants to play again.
+    // resetting gold and damage and health if the user wants to play again.
     Main.you.setGold(5);
     Main.you.setHealth(10);
     Main.you.setDamage(2);
     Main.you.setBearHealth(30);
-    //resetting cheats to disabled
-    toggle = -1;
+    // resetting cheats to disabled
+    toggle = 1;
     cheat = "disabled!";
 
     GridLayout OneByOne = new GridLayout(0, 1, 0, 10);
