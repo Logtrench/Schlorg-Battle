@@ -41,17 +41,16 @@ public class GUI implements ActionListener {
   }
 
   // Image creator method, adds to a panel
-  public static void image(JPanel panel, ImageIcon icon, int x, int y, int zx, int zy) {
+  public static void image(JPanel panel, ImageIcon icon) {
     JLabel label = new JLabel(icon);
-    label.setBounds(x, y, zx, zy);
     panel.add(label);
   }
 
   // Buton creator method , returns button
-  public static JButton butt(JPanel panel, String message, int x, int y, int zx, int zy) {
+  public static JButton butt(JPanel panel, String message) {
     JButton button = new JButton(message);
-    button.setBounds(x, y, zx, zy);
     panel.add(button);
+    button.addActionListener(new GUI());
     return button;
   }
 
@@ -97,7 +96,7 @@ public class GUI implements ActionListener {
       // set previous slides to invisible
       // call play
       case "Shop":
-        GUI.fightPanel.setVisible(false);
+        fightPanel.setVisible(false);
 
         Main.slide = 4;
         Main.play();
@@ -126,6 +125,7 @@ public class GUI implements ActionListener {
       // call play
       case "Fight":
         shopPanel.setVisible(false);
+        fightPanel.setVisible(false);
         Main.slide = 3;
         Main.play();
         break;
@@ -145,7 +145,7 @@ public class GUI implements ActionListener {
       // set previous slides to invisible
       // call play
       case "Refuse":
-        GUI.choicePanel.setVisible(false);
+        choicePanel.setVisible(false);
         Main.slide = 6;
         Main.play();
         break;
@@ -154,7 +154,7 @@ public class GUI implements ActionListener {
       // set previous slides to invisible
       // call play
       case "Join":
-        GUI.choicePanel.setVisible(false);
+        choicePanel.setVisible(false);
         Main.slide = 7;
         Main.play();
         break;
@@ -163,9 +163,9 @@ public class GUI implements ActionListener {
       // set previous slides to invisible
       // call play
       case "Finish":
-        GUI.joinPanel.setVisible(false);
-        GUI.refusePanel.setVisible(false);
-        GUI.diePanel.setVisible(false);
+        joinPanel.setVisible(false);
+        refusePanel.setVisible(false);
+        diePanel.setVisible(false);
 
         Main.slide = 9;
         Main.play();
@@ -187,138 +187,139 @@ public class GUI implements ActionListener {
     }
   }
 
-  //menu panel
+  // menu panel
   public static void Menu() {
 
-    //Making a layout with only one column and many rows
+    // Making a layout with only one column and many rows
     GridLayout OneCol = new GridLayout(0, 1, 0, 10);
 
-    //setting manuPanel parameters
-    menuPanel = GUI.panel(mainFrame, 270, 270);
+    // setting manuPanel parameters
+    menuPanel = panel(mainFrame, 270, 270);
     menuPanel.setLayout(OneCol);
     menuPanel.setBackground(Color.green);
 
-    //Adding two labels, the titles and cheat toggle
-    GUI.labl(menuPanel, "Battle for Schlorg");
-    GUI.labl(menuPanel, "Cheats " + cheat);
+    // Adding two labels, the titles and cheat toggle
+    labl(menuPanel, "Battle for Schlorg");
+    labl(menuPanel, "Cheats " + cheat);
 
-    //adding continue button and parameters
+    // adding continue button and parameters
     JButton cont = new JButton();
-    cont = GUI.butt(menuPanel, "Continue", 25, 25, 25, 25);
+    cont = butt(menuPanel, "Continue");
     cont.setBackground(Color.YELLOW);
     cont.setForeground(Color.BLACK);
-    cont.addActionListener(new GUI());
 
-    //adding exit button and paramters
+    // adding exit button and paramters
     JButton exit = new JButton();
-    exit = GUI.butt(menuPanel, "Exit", 25, 25, 25, 25);
-    exit.addActionListener(new GUI());
+    exit = butt(menuPanel, "Exit");
     exit.setForeground(Color.red);
 
-    //adding cheat button and parameters
+    // adding cheat button and parameters
     JButton cheat = new JButton();
-    cheat = GUI.butt(menuPanel, "Toggle Cheats", 25, 25, 25, 25);
+    cheat = butt(menuPanel, "Toggle Cheats");
     cheat.setForeground(Color.blue);
-    cheat.addActionListener(new GUI());
 
-    //making sure the ui can update in the end
+    // making sure the ui can update in the end
     menuPanel.setVisible(true);
   }
 
   public static void Intro() {
 
-    //Making a layout with only one column and many rows
+    // Making a layout with only one column and many rows
     GridLayout OneCol = new GridLayout(0, 1, 3, 10);
 
-    //setting introPanel parameters
-    introPanel = GUI.panel(mainFrame, 500, 300);
+    // setting introPanel parameters
+    introPanel = panel(mainFrame, 500, 300);
     introPanel.setLayout(OneCol);
     introPanel.setBackground(Color.green);
 
-    //adding text to panel, this is the story
-    GUI.labl(introPanel, "You\'ve been tasked by the king ");
-    GUI.labl(introPanel, "to scout out the forest in order to burn it down for farmland. ");
-    GUI.labl(introPanel, "On the way, you meet a bear, a magical bear which is the guardian");
-    GUI.labl(introPanel, "of the forest. You must defeat the bear to fulfill your mission.");
+    // adding text to panel, this is the story
+    labl(introPanel, "You\'ve been tasked by the king ");
+    labl(introPanel, "to scout out the forest in order to burn it down for farmland. ");
+    labl(introPanel, "On the way, you meet a bear, a magical bear which is the guardian");
+    labl(introPanel, "of the forest. You must defeat the bear to fulfill your mission.");
 
-    // /
-
+    // creating and setting Continue button paramters
     JButton next = new JButton();
-    next = GUI.butt(introPanel, "Continue", 25, 25, 25, 25);
+    next = butt(introPanel, "Continue");
     next.setBackground(Color.YELLOW);
     next.setForeground(Color.BLACK);
-    next.addActionListener(new GUI());
   }
 
   public static void Fight() {
-    // Gridlayout(rows, columns, spacing between rows, spacing between columns)
+
+    // making two layouts, one for the overall panel/stats panel
+    // one for the individual panels within stats (for different colours)
     GridLayout TwoCol = new GridLayout(0, 2, 3, 10);
     GridLayout OneCol = new GridLayout(0, 1, 3, 10);
 
+    // initializing every panel
     JPanel statPanel = new JPanel();
     JPanel youPanel = new JPanel();
     JPanel bearPanel = new JPanel();
     JPanel hintPanel1 = new JPanel();
     JPanel hintPanel2 = new JPanel();
 
+    // creating and setting fightPanel parameters
     fightPanel = new JPanel();
-
-    fightPanel = GUI.panel(mainFrame, 500, 500);
+    fightPanel = panel(mainFrame, 500, 500);
     fightPanel.setLayout(TwoCol);
     fightPanel.setBackground(Color.green);
 
+    // adding cute bear image
     ImageIcon icon = new ImageIcon("Images/cute.png");
-    image(fightPanel, icon, 10, 10, 10, 10);
+    image(fightPanel, icon);
 
+    // adding the other panels
     fightPanel.add(statPanel);
     statPanel.add(youPanel);
     statPanel.add(bearPanel);
 
+    // setting stat parameters
     statPanel.setLayout(TwoCol);
     statPanel.setBackground(Color.WHITE);
 
-    // uses rgb values to create a colour
+    // use rgb values to create a colour
     Color lightBlue = new Color(116, 146, 237);
     Color lightRed = new Color(237, 120, 116);
 
+    // adding colours and layouts to subPanels of statPanel
     youPanel.setLayout(OneCol);
     bearPanel.setLayout(OneCol);
     youPanel.setBackground(lightBlue);
     bearPanel.setBackground(lightRed);
 
-    // set titles
-    GUI.labl(youPanel, "You");
-    GUI.labl(bearPanel, "Bear");
+    // make titles for stat
+    labl(youPanel, "You");
+    labl(bearPanel, "Bear");
 
-    // checks if bear damage is unchanged
-
+    // checks if bear damage is unchanged, only display "took" when damage started
     if (Main.you.getBearDamage() != -1) {
-      GUI.labl(youPanel, "Took " + Main.you.getBearDamage() + " damage");// You
-      GUI.labl(bearPanel, "Took " + Main.you.getDamage() + " damage");// Bear
-    } else {
+      labl(youPanel, "Took " + Main.you.getBearDamage() + " damage");// You
+      labl(bearPanel, "Took " + Main.you.getDamage() + " damage");// Bear
+    } // no else as nothing would be within it
 
-      // Bear
-    }
+    //display health of bear and user using player.get methods
+    labl(youPanel, "Health: " + Main.you.getHealth());
+    labl(bearPanel, "Health: " + Main.you.getBearHealth());
 
-    GUI.labl(youPanel, "Health: " + Main.you.getHealth());
-    GUI.labl(bearPanel, "Health: " + Main.you.getBearHealth());
-
-    GUI.labl(hintPanel1, "Hint: earn gold");// You
-    GUI.labl(hintPanel2, " when damaged");
+    //display a critical piece of info, gold income and add it to panels
+    labl(hintPanel1, "Hint: earn gold");// You
+    labl(hintPanel2, " when damaged");
+    
+    //is added seperately for a desired size with gridLayout
     youPanel.add(hintPanel1);
     bearPanel.add(hintPanel2);
 
+    //creating and set of attack button
     JButton attack = new JButton();
-    attack = GUI.butt(fightPanel, "Attack", 25, 25, 25, 25);
+    attack = butt(fightPanel, "Attack");
     attack.setBackground(Color.YELLOW);
     attack.setForeground(Color.BLACK);
-    attack.addActionListener(new GUI());
 
     JButton shop = new JButton();
-    shop = GUI.butt(fightPanel, "Shop", 25, 25, 25, 25);
+    shop = butt(fightPanel, "Shop");
     shop.setBackground(Color.YELLOW);
     shop.setForeground(Color.BLACK);
-    shop.addActionListener(new GUI());
     fightPanel.setVisible(true);
   }
 
@@ -328,34 +329,32 @@ public class GUI implements ActionListener {
     GridLayout OneByOne = new GridLayout(3, 1, 0, 10);
     GridLayout TwoByTwo = new GridLayout(3, 2, 0, 10);
     // need to make a panel lol
-    shopPanel = GUI.panel(mainFrame, 400, 500);
+    shopPanel = panel(mainFrame, 400, 500);
     shopPanel.setLayout(OneByOne);
     shopPanel.setBackground(Color.green);
 
-    buyPanel = GUI.panel(mainFrame, 400, 500);
+    buyPanel = panel(mainFrame, 400, 500);
     buyPanel.setLayout(TwoByTwo);
     buyPanel.setBackground(Color.green);
 
-    GUI.labl(shopPanel, "Current Gold: " + Main.you.getGold());
+    labl(shopPanel, "Current Gold: " + Main.you.getGold());
     shopPanel.add(buyPanel);
 
-    GUI.labl(buyPanel, "Current Damage: " + Main.you.getDamage());
-    GUI.labl(buyPanel, "Current Health: " + Main.you.getHealth());
+    labl(buyPanel, "Current Damage: " + Main.you.getDamage());
+    labl(buyPanel, "Current Health: " + Main.you.getHealth());
 
-    GUI.labl(buyPanel, "Cost: 1 gold");
-    GUI.labl(buyPanel, "Cost: 5 gold");
+    labl(buyPanel, "Cost: 1 gold");
+    labl(buyPanel, "Cost: 5 gold");
 
     JButton damage = new JButton();
-    damage = GUI.butt(buyPanel, "Damage + 1", 25, 25, 25, 25);
+    damage = butt(buyPanel, "Damage + 1");
     damage.setBackground(Color.YELLOW);
     damage.setForeground(Color.BLACK);
-    damage.addActionListener(new GUI());
     JButton health = new JButton();
-    health = GUI.butt(buyPanel, "Health + 3", 25, 25, 25, 25);
-    health.addActionListener(new GUI());
+    health = butt(buyPanel, "Health + 3");
 
     JButton fight = new JButton();
-    fight = GUI.butt(shopPanel, "Fight", 25, 25, 25, 25);
+    fight = butt(shopPanel, "Fight");
     fight.addActionListener(new GUI());
     fight.setBackground(Color.YELLOW);
     fight.setForeground(Color.BLACK);
@@ -370,21 +369,19 @@ public class GUI implements ActionListener {
 
     GridLayout OneByOne = new GridLayout(0, 1, 0, 10);
 
-    defeatPanel = GUI.panel(mainFrame, 400, 500);
+    defeatPanel = panel(mainFrame, 400, 500);
     defeatPanel.setLayout(OneByOne);
     defeatPanel.setBackground(Color.green);
 
-    GUI.labl(defeatPanel, "You suck cause you died haha");
-    GUI.labl(defeatPanel, "Would you like to play again?");
+    labl(defeatPanel, "You suck cause you died haha");
+    labl(defeatPanel, "Would you like to play again?");
 
     JButton play_again = new JButton();
-    play_again = GUI.butt(defeatPanel, "Play Again", 25, 25, 25, 25);
+    play_again = butt(defeatPanel, "Play Again");
     play_again.setBackground(Color.YELLOW);
     play_again.setForeground(Color.BLACK);
-    play_again.addActionListener(new GUI());
     JButton exit = new JButton();
-    exit = GUI.butt(defeatPanel, "Exit", 25, 25, 25, 25);
-    exit.addActionListener(new GUI());
+    exit = butt(defeatPanel, "Exit");
     exit.setForeground(Color.red);
   }
 
@@ -393,27 +390,25 @@ public class GUI implements ActionListener {
     GridLayout OneByOne = new GridLayout(0, 1, 3, 10);
     JPanel buttonPanel = new JPanel();
 
-    choicePanel = GUI.panel(mainFrame, 500, 500);
+    choicePanel = panel(mainFrame, 500, 500);
     choicePanel.setLayout(OneByOne);
     choicePanel.setBackground(Color.green);
 
     JButton join = new JButton();
-    join = GUI.butt(buttonPanel, "Join", 25, 25, 25, 25);
+    join = butt(buttonPanel, "Join");
     join.setBackground(Color.YELLOW);
     join.setForeground(Color.BLACK);
-    join.addActionListener(new GUI());
 
     JButton refuse = new JButton();
-    refuse = GUI.butt(buttonPanel, "Refuse", 25, 25, 25, 25);
+    refuse = butt(buttonPanel, "Refuse");
     refuse.setBackground(Color.YELLOW);
     refuse.setForeground(Color.BLACK);
-    refuse.addActionListener(new GUI());
 
-    GUI.labl(choicePanel, "You're about to slay the bear before he utters: ");
-    GUI.labl(choicePanel, "“You are a formidable foe");
-    GUI.labl(choicePanel, "before I die I would like to ask you something… ");
-    GUI.labl(choicePanel, "Would you like to join me to save nature");
-    GUI.labl(choicePanel, "from the wrath of human destruction?”");
+    labl(choicePanel, "You're about to slay the bear before he utters: ");
+    labl(choicePanel, "“You are a formidable foe");
+    labl(choicePanel, "before I die I would like to ask you something… ");
+    labl(choicePanel, "Would you like to join me to save nature");
+    labl(choicePanel, "from the wrath of human destruction?”");
 
     choicePanel.add(buttonPanel);
 
@@ -423,79 +418,76 @@ public class GUI implements ActionListener {
 
     GridLayout OneByOne = new GridLayout(0, 1, 3, 10);
 
-    refusePanel = GUI.panel(mainFrame, 700, 500);
+    refusePanel = panel(mainFrame, 700, 500);
     refusePanel.setLayout(OneByOne);
     refusePanel.setBackground(Color.green);
 
-    GUI.labl(refusePanel, "You’ve accomplished the king’s task");
-    GUI.labl(refusePanel, "You’ve agreed to stay true to your duties ");
-    GUI.labl(refusePanel, "You go on to slay the bear and burn the forest as your king desired.");
-    GUI.labl(refusePanel, "Your actions led to the death of many animals and plants in the forest.");
-    GUI.labl(refusePanel, "Your kingdom was able to prosper from your duty. ");
-    GUI.labl(refusePanel, "They managed to build the farms they planned to increase crop production. ");
-    GUI.labl(refusePanel, "They’ve increase their agriculture trade by 70% ");
-    GUI.labl(refusePanel, "and starvation within the kingdom fell by 30%. ");
-    GUI.labl(refusePanel, "Impressed by your success, the king has promoted you to a commander.");
+    labl(refusePanel, "You’ve accomplished the king’s task");
+    labl(refusePanel, "You’ve agreed to stay true to your duties ");
+    labl(refusePanel, "You go on to slay the bear and burn the forest as your king desired.");
+    labl(refusePanel, "Your actions led to the death of many animals and plants in the forest.");
+    labl(refusePanel, "Your kingdom was able to prosper from your duty. ");
+    labl(refusePanel, "They managed to build the farms they planned to increase crop production. ");
+    labl(refusePanel, "They’ve increase their agriculture trade by 70% ");
+    labl(refusePanel, "and starvation within the kingdom fell by 30%. ");
+    labl(refusePanel, "Impressed by your success, the king has promoted you to a commander.");
 
     // /
 
     JButton next = new JButton();
-    next = GUI.butt(refusePanel, "Finish", 25, 25, 25, 25);
+    next = butt(refusePanel, "Finish");
     next.setBackground(Color.YELLOW);
     next.setForeground(Color.BLACK);
-    next.addActionListener(new GUI());
   }
 
   public static void BearEnd() {
 
     GridLayout OneByOne = new GridLayout(0, 1, 3, 10);
 
-    joinPanel = GUI.panel(mainFrame, 700, 500);
+    joinPanel = panel(mainFrame, 700, 500);
     joinPanel.setLayout(OneByOne);
     joinPanel.setBackground(Color.green);
 
-    GUI.labl(joinPanel, "You’ve failed the king’s task.");
-    GUI.labl(joinPanel, "You’ve agreed to side with the bear rather than your duties. ");
-    GUI.labl(joinPanel, "You go on with the bear to revive the forest. Restoring all the destruction ");
-    GUI.labl(joinPanel, "humans have caused to nature. You cannot return to your kingdom in fear of being punished");
+    labl(joinPanel, "You’ve failed the king’s task.");
+    labl(joinPanel, "You’ve agreed to side with the bear rather than your duties. ");
+    labl(joinPanel, "You go on with the bear to revive the forest. Restoring all the destruction ");
+    labl(joinPanel, "humans have caused to nature. You cannot return to your kingdom in fear of being punished");
 
-    GUI.labl(joinPanel, "with treason. You now inhabit within the forest, feasting  on plants.");
+    labl(joinPanel, "with treason. You now inhabit within the forest, feasting  on plants.");
 
-    GUI.labl(joinPanel, "You dedicate your life to protecting the forest with your combat skills.");
+    labl(joinPanel, "You dedicate your life to protecting the forest with your combat skills.");
 
-    GUI.labl(joinPanel, "Along the way you befriend other animals and adopt a new way of life.");
+    labl(joinPanel, "Along the way you befriend other animals and adopt a new way of life.");
     // /
 
     JButton next = new JButton();
-    next = GUI.butt(joinPanel, "Finish", 25, 25, 25, 25);
+    next = butt(joinPanel, "Finish");
     next.setBackground(Color.YELLOW);
     next.setForeground(Color.BLACK);
-    next.addActionListener(new GUI());
   }
 
   public static void BothLose() {
 
     GridLayout OneByOne = new GridLayout(0, 1, 3, 10);
 
-    diePanel = GUI.panel(mainFrame, 700, 500);
+    diePanel = panel(mainFrame, 700, 500);
     diePanel.setLayout(OneByOne);
     diePanel.setBackground(Color.green);
 
-    GUI.labl(diePanel, "You’ve failed the king’s task.");
-    GUI.labl(diePanel, "Both you and the bear have died");
-    GUI.labl(diePanel, "The king, not seeing your return, has");
-    GUI.labl(diePanel, "sent another scout who then accomplishes his task.");
+    labl(diePanel, "You’ve failed the king’s task.");
+    labl(diePanel, "Both you and the bear have died");
+    labl(diePanel, "The king, not seeing your return, has");
+    labl(diePanel, "sent another scout who then accomplishes his task.");
 
-    GUI.labl(diePanel, "Within a century no one remembers you nor the bear.");
+    labl(diePanel, "Within a century no one remembers you nor the bear.");
 
-    GUI.labl(diePanel, "Life goes on as normal");
+    labl(diePanel, "Life goes on as normal");
     // /
 
     JButton next = new JButton();
-    next = GUI.butt(diePanel, "Finish", 25, 25, 25, 25);
+    next = butt(diePanel, "Finish");
     next.setBackground(Color.YELLOW);
     next.setForeground(Color.BLACK);
-    next.addActionListener(new GUI());
   }
 
   public static void end() {
@@ -506,23 +498,21 @@ public class GUI implements ActionListener {
 
     GridLayout OneByOne = new GridLayout(0, 1, 0, 10);
 
-    endPanel = GUI.panel(mainFrame, 400, 500);
+    endPanel = panel(mainFrame, 400, 500);
     endPanel.setLayout(OneByOne);
     endPanel.setBackground(Color.green);
 
-    GUI.labl(endPanel, "Thank you for playing");
-    GUI.labl(endPanel, "Would you like to play again?");
+    labl(endPanel, "Thank you for playing");
+    labl(endPanel, "Would you like to play again?");
 
     JButton play_again = new JButton();
-    play_again = GUI.butt(endPanel, "Play Again", 25, 25, 25, 25);
+    play_again = butt(endPanel, "Play Again");
     play_again.setBackground(Color.YELLOW);
     play_again.setForeground(Color.BLACK);
-    play_again.addActionListener(new GUI());
     JButton exit = new JButton();
-    exit = GUI.butt(endPanel, "Exit", 25, 25, 25, 25);
-    exit.addActionListener(new GUI());
+    exit = butt(endPanel, "Exit");
     exit.setForeground(Color.red);
 
-    GUI.endPanel.setVisible(true);
+    endPanel.setVisible(true);
   }
 }

@@ -34,8 +34,7 @@ class Main {
         GUI.Intro();
         break;
       case 3:
-        //the fight slide, ability to attack or go to the shop
-
+        //the fight slide, ability to attack or go to the shop, sets invisible incase you meet and end condition
         GUI.Fight();
         break;
       case 4:
