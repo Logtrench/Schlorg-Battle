@@ -3,116 +3,83 @@ import java.awt.*;
 
 class Main {
 
-  // The way in which the game knows which panel to be on.
+  //The game will switch between panels using a variable called slide.
   public static int slide = new Integer(1);
+
+  //creating the player instance
   public static Player you = new Player();
 
-  // The over all game within a loop
+  //the initilizaiton of the game.
   public static void main(String[] args) {
 
-    // if user wants to play again, play, if not, exit
-    if (again()) {
-      play();
-    } else {
-      exit();
-    }
-    // loop all above
-
-  }
-
-  public static boolean again() {
-
-    // TO be filled in, atm it is always true;
-    return true;
+    // calls upon play once to initialize. play requires no parameters which is why it is prefered over main
+    play();
 
   }
 
   public static void play() {
 
-    // a clean navigation of every panel. should call each panel after each other to
-    // show the flow fo the game. (with ifs and whiles to find out where the use
-    // wants to go, such as the shop)
+    //a switch case to navigate the panels
+
+    //every panel switching button should change slide and call upon play.
     switch (slide) {
       case 1:
-        // slide
-        GUI.defeatPanel.setVisible(false);
-        GUI.endPanel.setVisible(false);
+        //the menu slide, where the player can choose cheats and start of game
 
         GUI.Menu();
         break;
       case 2:
-        GUI.menuPanel.setVisible(false);
-        GUI.defeatPanel.setVisible(false);
-        GUI.endPanel.setVisible(false);
+        //the intro  slide, tells the beginning fo the story
 
-        // introPanel.setVisible(true);
-        // slide 2
         GUI.Intro();
         break;
       case 3:
-        GUI.introPanel.setVisible(false);
+        //the fight slide, ability to attack or go to the shop
 
-        // set other stuff like shop to false.
-        // slide 3
         GUI.Fight();
         break;
       case 4:
-        GUI.fightPanel.setVisible(false);
+        //the shop slide, can buy health or damage before returning to fight
+        
         GUI.shop();
-        // only increase damage and increase health
         break;
       case 5:
-        GUI.introPanel.setVisible(false);
-        GUI.fightPanel.setVisible(false);
-        // GUI.BearWin();
+        //the losing slide, shows when you die, you can play again from teh beginning
+        
         GUI.lose();
         break;
       case 6:
-        // slide 6
-        GUI.choicePanel.setVisible(false);
+        //the king end slide, if you choose to refuse the bears offer, this is one of three endings
+        
         GUI.KingEnd();
         break;
       case 7:
-        // slide 7
-        GUI.choicePanel.setVisible(false);
+        //the bear end slide, if you choose to join the bear, this is one of three endings
+
         GUI.BearEnd();
         break;
       case 8:
-        // slide 8
-        GUI.fightPanel.setVisible(false);
+        //the choice slide, as you are about to kill the bear it wants you to join it.
+
         GUI.Choice();
         break;
       case 9:
-        GUI.joinPanel.setVisible(false);
-        GUI.refusePanel.setVisible(false);
-        GUI.diePanel.setVisible(false);
+        //the end slide, you have finished the game and are given the option to play again.
+        
         GUI.end();
         break;
-        case 10:
-        GUI.fightPanel.setVisible(false);
+      case 10:
+        //the both lose slide, this is the secret ending of the three. It is very hard to get. The sad ending
 
         GUI.BothLose();
         break;
       default:
+        //This simply should never be called. The println is very useful for finding a specific bug in this switch case.
+        
         System.out.println("default was called in play() this should not have happened");
         break;
-
     }
 
   }
 
-  public static void exit() {
-    // simply print the exit message and exit the system.
-    System.out.println("byeee mofo");
-    System.exit(0);
-
-  }
-
 }
-
-/*
- * manifesto sitrng bitte = please / your're welcome scheisse du mensch du
- * dankeschön = thankyou very much bitteschön = bitte very much moutarde =
- * mustard indeed
- * 
- */
