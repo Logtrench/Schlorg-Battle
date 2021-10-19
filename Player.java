@@ -7,15 +7,15 @@ public class Player {
   private int bearHealth = 30;
   private int bearDamage = -1;
 
-  //This parameter is for setting the difficulty
+  // This parameter is for setting the difficulty
   private int setBearHealth = 0;
 
-  //The constructor, if player doesn't choose difficulty, the constructor will be default (30 bearHealth);
-  public Player(int bearHealth)
-  {
+  // The constructor, if player doesn't choose difficulty, the constructor will be
+  // default (30 bearHealth);
+  public Player(int bearHealth) {
     this.setBearHealth = bearHealth;
   }
-  
+
   // the attack method
   public void attack() {
     // bear damage is random and should be from 0-4 (very rarely 4)
@@ -29,6 +29,9 @@ public class Player {
     if (health <= 0 && bearHealth <= 0) {
       GUI.fightPanel.setVisible(false);
       Main.slide = 10;
+
+      // setting the ending for scoreboard
+      Main.ending = "The Sad Ending";
     } else if (health <= 0) {
       GUI.fightPanel.setVisible(false);
       Main.slide = 5;
@@ -44,9 +47,8 @@ public class Player {
     return bearDamage;
   }
 
-  //good for setting difficulty
-  public void setDifficultyHealth(int health)
-  {
+  // good for setting difficulty
+  public void setDifficultyHealth(int health) {
     this.setBearHealth = health;
     this.bearHealth = health;
   }
@@ -91,7 +93,6 @@ public class Player {
     if (gold >= 1) {
       damage += 1;
       gold -= 1;
-      System.out.println("damage: " + damage);
     }
   }
 
@@ -100,17 +101,19 @@ public class Player {
     if (gold >= 5) {
       health += 3;
       gold -= 5;
-      System.out.println("Health: " + health);
     }
   }
 
-  // reset method, used in 3 places but a lot of lines, so a method makes it very clean
+  // reset method, used in 3 places but a lot of lines, so a method makes it very
+  // clean
   public void reset() {
-    // resetting gold, damage, health, bear damage, bearHealth, cheatToggle, and cheat
+    // resetting gold, damage, health, bear damage, bearHealth, cheatToggle, and
+    // cheat
     gold = 5;
     health = 10;
     damage = 2;
     bearHealth = setBearHealth;
+    Main.rounds = 0;
 
     // used as a UI check so must be reset again.
     bearDamage = -1;
