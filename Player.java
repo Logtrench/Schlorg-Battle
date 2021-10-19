@@ -7,6 +7,15 @@ public class Player {
   private int bearHealth = 30;
   private int bearDamage = -1;
 
+  //This parameter is for setting the difficulty
+  private int setBearHealth = 0;
+
+  //The constructor, if player doesn't choose difficulty, the constructor will be default (30 bearHealth);
+  public Player(int bearHealth)
+  {
+    this.setBearHealth = bearHealth;
+  }
+  
   // the attack method
   public void attack() {
     // bear damage is random and should be from 0-4 (very rarely 4)
@@ -33,6 +42,13 @@ public class Player {
   // get bear damage, useful for calculating the gold intake
   public int getBearDamage() {
     return bearDamage;
+  }
+
+  //good for setting difficulty
+  public void setDifficultyHealth(int health)
+  {
+    this.setBearHealth = health;
+    this.bearHealth = health;
   }
 
   // get health, useful in shop and fight panel
@@ -94,7 +110,7 @@ public class Player {
     gold = 5;
     health = 10;
     damage = 2;
-    bearHealth = 30;
+    bearHealth = setBearHealth;
 
     // used as a UI check so must be reset again.
     bearDamage = -1;

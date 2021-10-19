@@ -9,6 +9,9 @@ public class GUI implements ActionListener {
   public static int toggle = 1;
   public static String cheat = "disabled!";
 
+  //the difficulty variable
+  public static String difficulty = "Default, Medium";
+
   // The frame to be used by ALL panels
   public static JFrame mainFrame = new JFrame();
 
@@ -23,6 +26,15 @@ public class GUI implements ActionListener {
   static JPanel refusePanel = new JPanel();
   static JPanel endPanel = new JPanel();
   static JPanel diePanel = new JPanel();
+  static JPanel difPanel = new JPanel();
+
+  //this is the colour palet
+  /*static Color lightBlue = new Color(43, 172, 237);
+  Color lightBlue = new Color(116, 146, 237);
+  Color lightBlue = new Color(116, 146, 237);
+  Color lightBlue = new Color(116, 146, 237);
+  Color lightBlue = new Color(116, 146, 237);*/
+
 
   // Panel Creator method, returns the panel
   public static JPanel panel(JFrame frame, int x, int y) {
@@ -179,6 +191,51 @@ public class GUI implements ActionListener {
         Main.you.cheat(toggle);
         break;
 
+      //The difficulty button changes slide
+      //sets menu invisible
+      //call play
+      case "Choose Difficulty":
+        menuPanel.setVisible(false);
+        
+        Main.slide = 11;
+        Main.play();
+        break;
+
+      //Changes difficulty to easy
+      case "Easy":
+        difPanel.setVisible(false);
+        
+        difficulty = buttonName;
+        Main.you.setDifficultyHealth(15);
+        Main.play();
+        break;
+
+      //changes difficulty to medium
+      case "Medium":
+        difPanel.setVisible(false);
+        
+        difficulty = buttonName;
+        Main.you.setDifficultyHealth(30);
+        Main.play();
+        break;
+
+      //changes difficulty to hard
+      case "Hard":
+        difPanel.setVisible(false);
+        
+        difficulty = buttonName;
+        Main.you.setDifficultyHealth(50);
+        Main.play();
+        break;
+      
+      case "Confirm":
+        difPanel.setVisible(false);
+        
+        Main.slide = 1;
+        Main.play();
+        break;
+
+
       // should never be called, helps debugging buttons.
       default:
         System.out.println("default was called in button switch, should not have happened");
@@ -217,6 +274,11 @@ public class GUI implements ActionListener {
     JButton cheat = new JButton();
     cheat = butt(menuPanel, "Toggle Cheats");
     cheat.setForeground(Color.blue);
+
+    // adding difficulty button and parameters
+    JButton diff = new JButton();
+    diff = butt(menuPanel, "Choose Difficulty");
+    diff.setForeground(Color.blue);
 
     // making sure the ui can update in the end
     menuPanel.setVisible(true);
@@ -303,9 +365,13 @@ public class GUI implements ActionListener {
     labl(bearPanel, "Health: " + Main.you.getBearHealth());
 
     //display a critical piece of info, gold income and add it to panels
-    labl(hintPanel1, "Hint: earn gold");// You
-    labl(hintPanel2, " when damaged");
+    labl(hintPanel1, "Hint: earn gold");
+    labl(hintPanel1, " when damaged");
     
+    //Display second hint
+    labl(hintPanel2, "Hint: use shop");
+    labl(hintPanel2, "to get health");
+
     //is added seperately for a desired size with gridLayout
     youPanel.add(hintPanel1);
     bearPanel.add(hintPanel2);
@@ -514,5 +580,75 @@ public class GUI implements ActionListener {
     exit.setForeground(Color.red);
 
     endPanel.setVisible(true);
+  }
+
+  public static void Difficulty() {
+
+    GridLayout OneCol = new GridLayout(0, 1, 0, 10);
+    GridLayout TwoCol = new GridLayout(0, 2, 0, 10);
+
+    //3 subpanels are needed for desired layout
+    JPanel easPanel = new JPanel();
+    JPanel medPanel = new JPanel();
+    JPanel harPanel = new JPanel();
+
+    //Setting the layout for the subPanels
+    easPanel.setLayout(TwoCol);
+    medPanel.setLayout(TwoCol);
+    harPanel.setLayout(TwoCol);
+
+    //setting the subpanels to transparent
+    difPanel.setOpaque(false);
+    difPanel.setOpaque(false);
+    difPanel.setOpaque(false);
+
+    //Setting difpanel properties
+    difPanel = panel(mainFrame, 300, 300);
+    difPanel.setLayout(OneCol);
+    difPanel.setBackground(Color.green);
+
+    //adding text explanation
+    labl(difPanel, "Please choose a difficulty:");
+    labl(difPanel, "Difficulty is: " + difficulty);
+
+    //adding subpanels
+    difPanel.add(easPanel);
+    difPanel.add(medPanel);
+    difPanel.add(harPanel);
+
+    //creating the button for easy mode
+    JButton easy = new JButton();
+    easy = butt(easPanel, "Easy");
+    easy.setBackground(Color.YELLOW);
+    easy.setForeground(Color.BLACK);
+
+    //describing easy mode
+    labl(easPanel, "Bear Health of 15.");
+
+    //creating button ofr medium mode
+    JButton medium = new JButton();
+    medium = butt(medPanel, "Medium");
+    medium.setBackground(Color.YELLOW);
+    medium.setForeground(Color.BLACK);
+
+    //describing medium mode
+    labl(medPanel, "Bear Health of 30.");
+
+    //creating button for hard mode
+    JButton hard = new JButton();
+    hard = butt(harPanel, "Hard");
+    hard.setBackground(Color.YELLOW);
+    hard.setForeground(Color.BLACK);
+
+    //describing hard mode
+    labl(harPanel, "Bear Health of 50.");
+
+    //adding confirm button to go back to menu
+    JButton confirm = new JButton();
+    confirm = butt(difPanel, "Confirm");
+    confirm.setBackground(Color.YELLOW);
+    confirm.setForeground(Color.blue);
+
+    difPanel.setVisible(true);
   }
 }

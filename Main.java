@@ -7,7 +7,7 @@ class Main {
   public static int slide = new Integer(1);
 
   //creating the player instance
-  public static Player you = new Player();
+  public static Player you = new Player(30);
 
   //the initilizaiton of the game.
   public static void main(String[] args) {
@@ -71,6 +71,11 @@ class Main {
         //the both lose slide, this is the secret ending of the three. It is very hard to get. The sad ending
 
         GUI.BothLose();
+        break;
+      case 11:
+        //The difficulty menu
+
+        GUI.Difficulty();
         break;
       default:
         //This simply should never be called. The println is very useful for finding a specific bug in this switch case.
