@@ -10,7 +10,7 @@ public class GUI implements ActionListener {
   public static String cheat = "disabled!";
 
   // the submitting toggle variable and username input
-  public static boolean subToggle = false;
+  public static int subToggle = 0;
   public static JTextField user = new JTextField(50);
 
   // the difficulty variable
@@ -265,9 +265,15 @@ public class GUI implements ActionListener {
       // call play
       case "Submit":
         scorePanel.setVisible(false);
-        subToggle = true;
+        if(subToggle == 0)
+        {
+        subToggle = 1;
         Main.username = user.getText();
         ScoreBoard.main();
+        } else if (subToggle ==2)
+        {
+          //do nothing, simply call on play again to show them they already submitted the score
+        }
 
         Main.slide = 12;
         Main.play();
@@ -784,10 +790,18 @@ public class GUI implements ActionListener {
     submit.setBackground(Color.YELLOW);
     submit.setForeground(Color.BLACK);
 
-    // something to show they submitted it to the file
-    if (subToggle) {
-      labl(scorePanel, "Submitted " + Main.username + "'s response!");
+    //If they already submitted then it should not run it twice, this will let them know
+    if(subToggle == 2)
+    {
+      labl(scorePanel, "You already submitted " + Main.username + "'s score!'");
     }
+    
+    // something to show they submitted it to the file
+     else if (subToggle == 1) {
+      labl(scorePanel, "Submitted " + Main.username + "'s score");
+      subToggle = 2;
+    }
+
 
     // creating the button to go back to playAgain
     JButton back = new JButton();

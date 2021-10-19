@@ -62,10 +62,12 @@ class ScoreBoard {
         BufferedWriter bw = new BufferedWriter(new FileWriter("ScoreBoard.txt"));
 
         bw.write("**********\n");
-        bw.write("Scoreboard:\n");
+        bw.write("Scoreboard\n");
         bw.write("Username: " + Main.username + "\n");
         bw.write("Rounds took: " + Main.rounds + "\n");
         bw.write("Ending: " + Main.ending + "\n");
+        bw.write("Difficulty: " + GUI.difficulty + "\n");
+        bw.write("Cheats: " + GUI.cheat + "\n");
         bw.write("**********\n");
 
         bw.close();
