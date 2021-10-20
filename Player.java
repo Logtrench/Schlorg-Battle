@@ -120,6 +120,7 @@ public class Player {
 
     GUI.toggle = 1;
     GUI.cheat = "disabled!";
+    Main.username = "";
   }
 
   // the cheat method
