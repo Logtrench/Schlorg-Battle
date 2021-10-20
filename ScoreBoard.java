@@ -40,27 +40,31 @@ class ScoreBoard {
 
       }
 
-      // close reader and writier for first file
+      // close reader and writier for first file so that others can right
       br.close();
       bwt.close();
 
+      //writing the temp file into the scoreboard
       String t = "";
       while ((t = brt.readLine()) != null) {
         bw.write(t + "\n");
       }
 
+      //closing the other reader and writer
       brt.close();
-
       bw.close();
 
+      //deleting the Scoreboard temp file
       File newFile = new File("ScoreBoard-temp.txt");
       newFile.delete();
 
     } catch (FileNotFoundException e) {
+      //if no file is found, create a new file
       System.out.println("Creating ScoreBoard File...");
       try {
         BufferedWriter bw = new BufferedWriter(new FileWriter("ScoreBoard.txt"));
 
+        //add score
         bw.write("**********\n");
         bw.write("Scoreboard\n");
         bw.write("Username: " + Main.username + "\n");
@@ -70,14 +74,17 @@ class ScoreBoard {
         bw.write("Cheats: " + GUI.cheat + "\n");
         bw.write("**********\n");
 
+        //close writer
         bw.close();
       } catch (Exception f) {
-        System.out.println("WADWD");
+        //print there was an error
+        System.out.println("There was an error in the bufferReader, when there was no file");
       }
 
       return;
     } catch (Exception e) {
-      System.out.println("ERROR IN BUFFER READER");
+        //print if there was an error
+      System.out.println("There was an error in the bufferReader, already having a file");
 
       return;
     }

@@ -1,6 +1,3 @@
-import javax.swing.*;
-import java.awt.*;
-
 class Main {
 
   // The game will switch between panels using a variable called slide.
