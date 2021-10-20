@@ -118,6 +118,9 @@ public class Player {
     // used as a UI check so must be reset again.
     bearDamage = -1;
 
+    //resetting submission bool
+    GUI.sub = false;
+
     GUI.toggle = 1;
     GUI.cheat = "disabled!";
     Main.username = "";

@@ -9,8 +9,8 @@ public class GUI implements ActionListener {
   public static int toggle = 1;
   public static String cheat = "disabled!";
 
-  // the submitting toggle variable and username input
-  public static int subToggle = 0;
+  // the submitting toggle variable and username testfield object
+  public static boolean sub = false;
   public static JTextField user = new JTextField(50);
 
   // the difficulty variable
@@ -34,16 +34,15 @@ public class GUI implements ActionListener {
   static JPanel scorePanel = new JPanel();
 
   // this is the colour palet
-  
+
   static Color golden = new Color(254, 158, 16);
-  static Color deepBlue = new Color(132, 143, 195); 
+  static Color deepBlue = new Color(132, 143, 195);
   static Color forest = new Color(28, 44, 44);
-  static Color rose = new Color(206, 161, 178); 
-  static Color pale = new Color(246,226,127);
-  static Color ruby = new Color(202, 46,85);
+  static Color rose = new Color(206, 161, 178);
+  static Color pale = new Color(246, 226, 127);
+  static Color ruby = new Color(202, 46, 85);
   static Color darkerBlue = new Color(75, 89, 154);
   static Color lighterBlue = new Color(193, 199, 225);
-  
 
   // Panel Creator method, returns the panel
   public static JPanel panel(JFrame frame, int x, int y) {
@@ -61,7 +60,7 @@ public class GUI implements ActionListener {
     panel.add(label);
   }
 
-  public static void labl(JPanel panel, String message,int size ) {
+  public static void labl(JPanel panel, String message, int size) {
     JLabel label = new JLabel(message, SwingConstants.CENTER);
     Font Robo = new Font("Roboto", Font.BOLD, size);
     label.setFont(Robo);
@@ -278,20 +277,24 @@ public class GUI implements ActionListener {
       // call play
       case "Submit":
         scorePanel.setVisible(false);
-        if(user.getText().equals(Main.username))
-        {
-          subToggle = 3;
-        }
-        else if(subToggle == 0)
-        {
-        subToggle = 1;
-        Main.username = user.getText();
-        ScoreBoard.main();
-        } else if (subToggle ==2)
-        {
-          //do nothing, simply call on play again to show them they already submitted the score
-        }
 
+        //check if user entered a username
+        if (user.getText().isEmpty()) 
+        {
+          
+        } else
+        {//check if they already submitted
+          if (sub) {
+          
+        } else
+        {//if not submited already, let them submit
+          Main.username = user.getText();
+          ScoreBoard.main();
+          sub = true;
+        }
+        }
+        
+        //update UI
         Main.slide = 12;
         Main.play();
         break;
@@ -336,12 +339,11 @@ public class GUI implements ActionListener {
 
     // adding continue button and parameters
     JButton cont = new JButton();
-    cont = butt(menuPanel, "Continue",golden,Color.BLACK);
+    cont = butt(menuPanel, "Continue", golden, Color.BLACK);
 
     // adding exit button and paramters
     JButton exit = new JButton();
-    exit = butt(menuPanel, "Exit",(new JButton().getBackground()),ruby);
-  
+    exit = butt(menuPanel, "Exit", (new JButton().getBackground()), ruby);
 
     // adding cheat button and parameters
     JButton cheat = new JButton();
@@ -409,7 +411,6 @@ public class GUI implements ActionListener {
     statPanel.setLayout(TwoCol);
     statPanel.setBackground(Color.WHITE);
 
-
     // adding colours and layouts to subPanels of statPanel
     youPanel.setLayout(OneCol);
     bearPanel.setLayout(OneCol);
@@ -433,14 +434,14 @@ public class GUI implements ActionListener {
     // creating and set of attack button
     JButton attack = new JButton();
     attack = butt(fightPanel, "Attack", golden, Color.BLACK);
-    attack.setFont(new Font("Roboto",Font.BOLD, 25));
+    attack.setFont(new Font("Roboto", Font.BOLD, 25));
 
     // creating and set of shop button
     JButton shop = new JButton();
     shop = butt(fightPanel, "Shop", golden, Color.BLACK);
-    shop.setFont(new Font("Roboto",Font.BOLD, 25));
-    
-    //setting to visible
+    shop.setFont(new Font("Roboto", Font.BOLD, 25));
+
+    // setting to visible
     fightPanel.setVisible(true);
   }
 
@@ -463,34 +464,32 @@ public class GUI implements ActionListener {
     buyPanel.setBackground(deepBlue);
 
     // displaying the amount of gold user has
-    labl(shopPanel, "Current Gold: " + Main.you.getGold(),22);
-    labl(shopPanel, "Hint: you earn gold by taking damage.",15);
+    labl(shopPanel, "Current Gold: " + Main.you.getGold(), 22);
+    labl(shopPanel, "Hint: you earn gold by taking damage.", 15);
     shopPanel.add(buyPanel);
 
     // displaying current damage and health of player
-    labl(buyPanel, "Current Damage: " + Main.you.getDamage(),15);
-    labl(buyPanel, "Current Health: " + Main.you.getHealth(),15);
+    labl(buyPanel, "Current Damage: " + Main.you.getDamage(), 15);
+    labl(buyPanel, "Current Health: " + Main.you.getHealth(), 15);
 
     // displaying cost of upgrades
-    labl(buyPanel, "Cost: 1 gold",15);
-    labl(buyPanel, "Cost: 5 gold",15);
+    labl(buyPanel, "Cost: 1 gold", 15);
+    labl(buyPanel, "Cost: 5 gold", 15);
 
     // creation and setting of the damage and health buy buttons
     JButton damage = new JButton();
-    damage = butt(buyPanel, "Damage + 1",golden, Color.BLACK);
+    damage = butt(buyPanel, "Damage + 1", golden, Color.BLACK);
     JButton health = new JButton();
     health = butt(buyPanel, "Health + 3", golden, Color.BLACK);
 
-    //setting standard colours for buttons
+    // setting standard colours for buttons
     health.setBackground(golden);
     damage.setBackground(golden);
-    
-    //if they cannot buy, it will be a lighter version
-    if(Main.you.getGold()<5)
-    {
+
+    // if they cannot buy, it will be a lighter version
+    if (Main.you.getGold() < 5) {
       health.setBackground(pale);
-      if(Main.you.getGold()<1)
-      {
+      if (Main.you.getGold() < 1) {
         damage.setBackground(pale);
       }
     }
@@ -499,7 +498,7 @@ public class GUI implements ActionListener {
     // creation of the button to send you back to fighting
     JButton fight = new JButton();
     fight = butt(shopPanel, "Fight", golden, Color.BLACK);
-    fight.setFont(new Font("Roboto",Font.BOLD, 25));
+    fight.setFont(new Font("Roboto", Font.BOLD, 25));
 
     // set to true for UI update
     shopPanel.setVisible(true);
@@ -528,7 +527,7 @@ public class GUI implements ActionListener {
 
     // Display exit button
     JButton exit = new JButton();
-    exit = butt(defeatPanel, "Exit",(new JButton().getBackground()), ruby);
+    exit = butt(defeatPanel, "Exit", (new JButton().getBackground()), ruby);
   }
 
   public static void Choice() {
@@ -571,7 +570,7 @@ public class GUI implements ActionListener {
     GridLayout OneByOne = new GridLayout(0, 1, 3, 10);
 
     // setting of panel parameters
-    refusePanel = panel(mainFrame, 700, 500);
+    refusePanel = panel(mainFrame, 700, 400);
     refusePanel.setLayout(OneByOne);
     refusePanel.setBackground(deepBlue);
 
@@ -588,7 +587,7 @@ public class GUI implements ActionListener {
 
     // creation and settin of Finish button
     JButton next = new JButton();
-    next = butt(refusePanel, "Finish",golden, Color.BLACK);
+    next = butt(refusePanel, "Finish", golden, Color.BLACK);
   }
 
   public static void BearEnd() {
@@ -597,7 +596,7 @@ public class GUI implements ActionListener {
     GridLayout OneByOne = new GridLayout(0, 1, 3, 10);
 
     // setting of panel parameters
-    joinPanel = panel(mainFrame, 700, 500);
+    joinPanel = panel(mainFrame, 670, 400);
     joinPanel.setLayout(OneByOne);
     joinPanel.setBackground(deepBlue);
 
@@ -624,7 +623,7 @@ public class GUI implements ActionListener {
     GridLayout OneByOne = new GridLayout(0, 1, 3, 10);
 
     // setting of main panel
-    diePanel = panel(mainFrame, 700, 500);
+    diePanel = panel(mainFrame, 400, 400);
     diePanel.setLayout(OneByOne);
     diePanel.setBackground(deepBlue);
 
@@ -638,7 +637,7 @@ public class GUI implements ActionListener {
 
     // creation and set of finish button
     JButton next = new JButton();
-    next = butt(diePanel, "Finish",golden,Color.BLACK);
+    next = butt(diePanel, "Finish", golden, Color.BLACK);
   }
 
   public static void end() {
@@ -647,7 +646,7 @@ public class GUI implements ActionListener {
     GridLayout OneByOne = new GridLayout(0, 1, 0, 10);
 
     // setting of main panel
-    endPanel = panel(mainFrame, 400, 500);
+    endPanel = panel(mainFrame, 400, 300);
     endPanel.setLayout(OneByOne);
     endPanel.setBackground(deepBlue);
 
@@ -661,11 +660,11 @@ public class GUI implements ActionListener {
 
     // creation and set of submit score button
     JButton Submit = new JButton();
-    Submit = butt(endPanel, "Submit Score", golden, Color.BLACK);
+    Submit = butt(endPanel, "Submit Score", forest, golden);
 
     // creation and set of exit button
     JButton exit = new JButton();
-    exit = butt(endPanel, "Exit",(new JButton().getBackground()),ruby);
+    exit = butt(endPanel, "Exit", (new JButton().getBackground()), ruby);
 
     // set to true for UI updating
     endPanel.setVisible(true);
@@ -687,7 +686,7 @@ public class GUI implements ActionListener {
     medPanel.setLayout(TwoCol);
     harPanel.setLayout(TwoCol);
 
-    //adding colours to subpanels
+    // adding colours to subpanels
     easPanel.setBackground(lighterBlue);
     medPanel.setBackground(lighterBlue);
     harPanel.setBackground(lighterBlue);
@@ -708,30 +707,30 @@ public class GUI implements ActionListener {
 
     // creating the button for easy mode
     JButton easy = new JButton();
-    easy = butt(easPanel, "Easy",forest,golden);
+    easy = butt(easPanel, "Easy", forest, golden);
 
     // describing easy mode
     labl(easPanel, "Bear Health of 15.");
 
     // creating button ofr medium mode
     JButton medium = new JButton();
-    medium = butt(medPanel, "Medium",forest,golden);
+    medium = butt(medPanel, "Medium", forest, golden);
 
     // describing medium mode
     labl(medPanel, "Bear Health of 30.");
 
     // creating button for hard mode
     JButton hard = new JButton();
-    hard = butt(harPanel, "Hard",forest,golden);
+    hard = butt(harPanel, "Hard", forest, golden);
 
     // describing hard mode
     labl(harPanel, "Bear Health of 50.");
 
     // adding confirm button to go back to menu
     JButton confirm = new JButton();
-    confirm = butt(difPanel, "Confirm",golden,Color.black);
+    confirm = butt(difPanel, "Confirm", golden, Color.black);
 
-    //setting visible to update UI
+    // setting visible to update UI
     difPanel.setVisible(true);
   }
 
@@ -752,13 +751,12 @@ public class GUI implements ActionListener {
     JPanel cheatPanel = new JPanel();
     JPanel diffiPanel = new JPanel();
 
-    //setting the colours
+    // setting the colours
     userPanel.setBackground(lighterBlue);
     roundPanel.setBackground(lighterBlue);
     endingPanel.setBackground(lighterBlue);
     cheatPanel.setBackground(lighterBlue);
     diffiPanel.setBackground(lighterBlue);
-
 
     // adding title
     labl(scorePanel, "ScoreBoard Submitter:");
@@ -782,27 +780,25 @@ public class GUI implements ActionListener {
 
     // creating the button for easy mode
     JButton submit = new JButton();
-    submit = butt(scorePanel, "Submit",golden, Color.BLACK);
+    submit = butt(scorePanel, "Submit", golden, Color.BLACK);
 
-    //If they already submitted then it should not run it twice, this will let them know
-    
-    if((user.getText().equals(Main.username))&&subToggle==3)
-    {
-      labl(scorePanel, "You need to enter a new username!");
-      subToggle=0;
-    }else if(subToggle == 2)
-    {
+    // If they already submitted then it should not run it twice, this will let them
+    // know
+
+    //if they already submitted and there is a username
+    if (sub && user.getText().isEmpty()) {
+      labl(scorePanel, "You submitted " + Main.username + "'s score!'");
+    }//if they already submitted and the entered a username
+    else if (sub) {
       labl(scorePanel, "You already submitted " + Main.username + "'s score!'");
-    }// something to show they submitted it to the file
-     else if (subToggle == 1) {
-      labl(scorePanel, "Submitted " + Main.username + "'s score");
-      subToggle = 2;
+    } //if the didn't submit and didn't ener a username
+    else {
+      labl(scorePanel, "Enter a username to submit!");
     }
-
 
     // creating the button to go back to playAgain
     JButton back = new JButton();
-    back = butt(scorePanel, "Back",golden, Color.BLACK);
+    back = butt(scorePanel, "Back", golden, Color.BLACK);
 
     // set visible for UI update
     scorePanel.setVisible(true);

@@ -5,7 +5,7 @@ class Main {
 
   // The Scoreboard variables
   public static int rounds = 0;
-  public static String username = "";
+  public static String username = null;
   public static String ending = "Unfinished";
 
   // creating the player instance
