@@ -9,6 +9,9 @@ public class GUI implements ActionListener {
   public static int toggle = 1;
   public static String cheat = "disabled!";
 
+  //this boolean is for the "Takes damage" UI
+  static boolean isHit = false;
+
   // the submitting toggle variable and username testfield object
   public static boolean sub = false;
   public static JTextField user = new JTextField(50);
@@ -36,7 +39,7 @@ public class GUI implements ActionListener {
   // this is the colour palet
   // colour names reflect purpose
   static Color lightContrast = new Color(181, 224, 40);
-  static Color background = new Color(72, 145, 35);
+  static Color background = new Color(83, 167, 40);
   static Color darkContrast = new Color(27, 61, 10);
   static Color accent = new Color(206, 161, 178);
   static Color bright = new Color(231, 255, 150);
@@ -101,7 +104,7 @@ public class GUI implements ActionListener {
 
     // checking the button name and implementing actions
     // in switch case
-    switch (buttonName) {
+    switch (e.getActionCommand()) {
       // exit button will simply exit system
       case "Exit":
         System.exit(0);
@@ -127,6 +130,9 @@ public class GUI implements ActionListener {
         fightPanel.setVisible(false);
         Main.rounds++;
 
+        //this should update the UI to show damage
+        isHit = true;
+
         Main.play();
         break;
 
@@ -136,6 +142,8 @@ public class GUI implements ActionListener {
       case "Shop":
         fightPanel.setVisible(false);
 
+        //this should update the UI to not show damage taken when returning from shop
+        isHit = false;
         Main.slide = 4;
         Main.play();
         break;
@@ -239,7 +247,7 @@ public class GUI implements ActionListener {
 
         // changes string of difficulty chosen into what was clicked
         difficulty = buttonName;
-        Main.you.setDifficultyHealth(15);
+        Main.you.setDifficulty(15,5);
         Main.play();
         break;
 
@@ -249,7 +257,7 @@ public class GUI implements ActionListener {
 
         // changes string of difficulty chosen into what was clicked
         difficulty = buttonName;
-        Main.you.setDifficultyHealth(30);
+        Main.you.setDifficulty(30,4);
         Main.play();
         break;
 
@@ -259,7 +267,7 @@ public class GUI implements ActionListener {
 
         // changes string of difficulty chosen into what was clicked
         difficulty = buttonName;
-        Main.you.setDifficultyHealth(50);
+        Main.you.setDifficulty(50,10);
         Main.play();
         break;
 
@@ -341,10 +349,6 @@ public class GUI implements ActionListener {
     JButton cont = new JButton();
     cont = butt(menuPanel, "Continue", lightContrast, Color.BLACK);
 
-    // adding exit button and paramters
-    JButton exit = new JButton();
-    exit = butt(menuPanel, "Exit", (new JButton().getBackground()), ruby);
-
     // adding cheat button and parameters
     JButton cheat = new JButton();
     cheat = butt(menuPanel, "Toggle Cheats", darkContrast, lightContrast);
@@ -352,6 +356,10 @@ public class GUI implements ActionListener {
     // adding difficulty button and parameters
     JButton diff = new JButton();
     diff = butt(menuPanel, "Choose Difficulty", darkContrast, lightContrast);
+
+    // adding exit button and paramters
+    JButton exit = new JButton();
+    exit = butt(menuPanel, "Exit", (lightContrast), ruby);
 
     // making sure the ui can update in the end
     menuPanel.setVisible(true);
@@ -422,7 +430,7 @@ public class GUI implements ActionListener {
     labl(bearPanel, "Bear");
 
     // checks if bear damage is unchanged, only display "took" when damage started
-    if (Main.you.getBearDamage() != -1) {
+    if (isHit) {
       labl(youPanel, "Took " + Main.you.getBearDamage() + " damage");// You
       labl(bearPanel, "Took " + Main.you.getDamage() + " damage");// Bear
     } // no else as nothing would be within it
@@ -473,7 +481,7 @@ public class GUI implements ActionListener {
     labl(buyPanel, "Current Health: " + Main.you.getHealth(), 15);
 
     // displaying cost of upgrades
-    labl(buyPanel, "Cost: 1 gold", 15);
+    labl(buyPanel, "Cost: 2 gold", 15);
     labl(buyPanel, "Cost: 5 gold", 15);
 
     // creation and setting of the damage and health buy buttons
@@ -489,7 +497,7 @@ public class GUI implements ActionListener {
     // if they cannot buy, it will be a lighter version
     if (Main.you.getGold() < 5) {
       health.setBackground(bright);
-      if (Main.you.getGold() < 1) {
+      if (Main.you.getGold() < 2) {
         damage.setBackground(bright);
       }
     }
@@ -527,7 +535,7 @@ public class GUI implements ActionListener {
 
     // Display exit button
     JButton exit = new JButton();
-    exit = butt(defeatPanel, "Exit", (new JButton().getBackground()), ruby);
+    exit = butt(defeatPanel, "Exit", lightContrast, ruby);
   }
 
   public static void Choice() {
@@ -664,7 +672,7 @@ public class GUI implements ActionListener {
 
     // creation and set of exit button
     JButton exit = new JButton();
-    exit = butt(endPanel, "Exit", (new JButton().getBackground()), ruby);
+    exit = butt(endPanel, "Exit", lightContrast, ruby);
 
     // set to true for UI updating
     endPanel.setVisible(true);
@@ -740,7 +748,7 @@ public class GUI implements ActionListener {
     GridLayout OneCol = new GridLayout(0, 1, 0, 10);
 
     // Setting difpanel properties
-    scorePanel = panel(mainFrame, 300, 300);
+    scorePanel = panel(mainFrame, 300, 400);
     scorePanel.setLayout(OneCol);
     scorePanel.setBackground(background);
 
@@ -750,6 +758,7 @@ public class GUI implements ActionListener {
     JPanel endingPanel = new JPanel();
     JPanel cheatPanel = new JPanel();
     JPanel diffiPanel = new JPanel();
+    JPanel healthPanel = new JPanel();
 
     // setting the colours
     userPanel.setBackground(lightBack);
@@ -757,6 +766,7 @@ public class GUI implements ActionListener {
     endingPanel.setBackground(lightBack);
     cheatPanel.setBackground(lightBack);
     diffiPanel.setBackground(lightBack);
+    healthPanel.setBackground(lightBack);
 
     // adding title
     labl(scorePanel, "ScoreBoard Submitter:");
@@ -765,8 +775,9 @@ public class GUI implements ActionListener {
     scorePanel.add(userPanel);
     scorePanel.add(roundPanel);
     scorePanel.add(endingPanel);
-    scorePanel.add(cheatPanel);
     scorePanel.add(diffiPanel);
+    scorePanel.add(healthPanel);
+    scorePanel.add(cheatPanel);
 
     // adding username input
     labl(userPanel, "Username: ");
@@ -777,6 +788,7 @@ public class GUI implements ActionListener {
     labl(endingPanel, "Ending: " + Main.ending);
     labl(diffiPanel, "Difficulty: " + difficulty);
     labl(cheatPanel, "Cheats: " + cheat);
+    labl(healthPanel, "Finishing Health: " + Main.you.getHealth());
 
     // creating the button for easy mode
     JButton submit = new JButton();
@@ -786,7 +798,7 @@ public class GUI implements ActionListener {
     // know
 
     //if they already submitted and there is a username
-    if (sub && user.getText().isEmpty()) {
+    if (sub && user.getText().equals(Main.username)) {
       labl(scorePanel, "You submitted " + Main.username + "'s score!'");
     }//if they already submitted and the entered a username
     else if (sub) {

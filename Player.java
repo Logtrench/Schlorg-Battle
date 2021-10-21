@@ -9,6 +9,7 @@ public class Player {
 
   // This parameter is for setting the difficulty
   private int setBearHealth = 0;
+  private int setGold = 0;
 
   // The constructor, if player doesn't choose difficulty, the constructor will be
   // default (30 bearHealth);
@@ -48,9 +49,12 @@ public class Player {
   }
 
   // good for setting difficulty
-  public void setDifficultyHealth(int health) {
+  public void setDifficulty(int health, int gold) {
     this.setBearHealth = health;
     this.bearHealth = health;
+    
+    this.setGold = gold;
+    this.gold = gold;
   }
 
   // get health, useful in shop and fight panel
@@ -90,9 +94,9 @@ public class Player {
 
   // buy damage function, makes buying damage easy in shop
   public void buyDamage() {
-    if (gold >= 1) {
+    if (gold >= 2) {
       damage += 1;
-      gold -= 1;
+      gold -= 2;
     }
   }
 
@@ -107,9 +111,9 @@ public class Player {
   // reset method, used in 3 places but a lot of lines, so a method makes it very
   // clean
   public void reset() {
-    // resetting gold, damage, health, bear damage, bearHealth, cheatToggle, and
+    // resetting gold, damage, health, bear damage, bearHealth, rounds, cheatToggle, and
     // cheat
-    gold = 5;
+    gold = setGold;
     health = 10;
     damage = 2;
     bearHealth = setBearHealth;

@@ -35,6 +35,7 @@ class ScoreBoard {
         bwt.write("Rounds took: " + Main.rounds + "\n");
         bwt.write("Ending: " + Main.ending + "\n");
         bwt.write("Difficulty: " + GUI.difficulty + "\n");
+        bwt.write("Finishing Health: " + Main.you.getHealth() + "\n");
         bwt.write("Cheats: " + GUI.cheat + "\n");
         bwt.write("**********\n");
 
@@ -71,6 +72,7 @@ class ScoreBoard {
         bw.write("Rounds took: " + Main.rounds + "\n");
         bw.write("Ending: " + Main.ending + "\n");
         bw.write("Difficulty: " + GUI.difficulty + "\n");
+        bw.write("Finishing Health: " + Main.you.getHealth() + "\n");
         bw.write("Cheats: " + GUI.cheat + "\n");
         bw.write("**********\n");
 
