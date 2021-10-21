@@ -34,15 +34,15 @@ public class GUI implements ActionListener {
   static JPanel scorePanel = new JPanel();
 
   // this is the colour palet
-
-  static Color golden = new Color(254, 158, 16);
-  static Color deepBlue = new Color(132, 143, 195);
-  static Color forest = new Color(28, 44, 44);
-  static Color rose = new Color(206, 161, 178);
-  static Color pale = new Color(246, 226, 127);
+  // colour names reflect purpose
+  static Color lightContrast = new Color(181, 224, 40);
+  static Color background = new Color(72, 145, 35);
+  static Color darkContrast = new Color(27, 61, 10);
+  static Color accent = new Color(206, 161, 178);
+  static Color bright = new Color(231, 255, 150);
   static Color ruby = new Color(202, 46, 85);
-  static Color darkerBlue = new Color(75, 89, 154);
-  static Color lighterBlue = new Color(193, 199, 225);
+  static Color darkBack = new Color(44, 94, 19);
+  static Color lightBack = new Color(165, 219, 138);
 
   // Panel Creator method, returns the panel
   public static JPanel panel(JFrame frame, int x, int y) {
@@ -331,7 +331,7 @@ public class GUI implements ActionListener {
     // setting manuPanel parameters
     menuPanel = panel(mainFrame, 300, 300);
     menuPanel.setLayout(OneCol);
-    menuPanel.setBackground(deepBlue);
+    menuPanel.setBackground(background);
 
     // Adding two labels, the titles and cheat toggle
     labl(menuPanel, "Battle for Schlorg");
@@ -339,7 +339,7 @@ public class GUI implements ActionListener {
 
     // adding continue button and parameters
     JButton cont = new JButton();
-    cont = butt(menuPanel, "Continue", golden, Color.BLACK);
+    cont = butt(menuPanel, "Continue", lightContrast, Color.BLACK);
 
     // adding exit button and paramters
     JButton exit = new JButton();
@@ -347,11 +347,11 @@ public class GUI implements ActionListener {
 
     // adding cheat button and parameters
     JButton cheat = new JButton();
-    cheat = butt(menuPanel, "Toggle Cheats", forest, golden);
+    cheat = butt(menuPanel, "Toggle Cheats", darkContrast, lightContrast);
 
     // adding difficulty button and parameters
     JButton diff = new JButton();
-    diff = butt(menuPanel, "Choose Difficulty", forest, golden);
+    diff = butt(menuPanel, "Choose Difficulty", darkContrast, lightContrast);
 
     // making sure the ui can update in the end
     menuPanel.setVisible(true);
@@ -365,7 +365,7 @@ public class GUI implements ActionListener {
     // setting introPanel parameters
     introPanel = panel(mainFrame, 500, 300);
     introPanel.setLayout(OneCol);
-    introPanel.setBackground(deepBlue);
+    introPanel.setBackground(background);
 
     // adding text to panel, this is the story
     labl(introPanel, "You\'ve been tasked by the king ");
@@ -375,7 +375,7 @@ public class GUI implements ActionListener {
 
     // creating and setting Continue button paramters
     JButton next = new JButton();
-    next = butt(introPanel, "Continue", golden, Color.BLACK);
+    next = butt(introPanel, "Continue", lightContrast, Color.BLACK);
   }
 
   public static void Fight() {
@@ -396,7 +396,7 @@ public class GUI implements ActionListener {
     fightPanel = new JPanel();
     fightPanel = panel(mainFrame, 500, 500);
     fightPanel.setLayout(TwoCol);
-    fightPanel.setBackground(deepBlue);
+    fightPanel.setBackground(background);
 
     // adding cute bear image
     ImageIcon icon = new ImageIcon("Images/cute.png");
@@ -414,8 +414,8 @@ public class GUI implements ActionListener {
     // adding colours and layouts to subPanels of statPanel
     youPanel.setLayout(OneCol);
     bearPanel.setLayout(OneCol);
-    youPanel.setBackground(pale);
-    bearPanel.setBackground(rose);
+    youPanel.setBackground(bright);
+    bearPanel.setBackground(accent);
 
     // make titles for stat
     labl(youPanel, "You");
@@ -433,12 +433,12 @@ public class GUI implements ActionListener {
 
     // creating and set of attack button
     JButton attack = new JButton();
-    attack = butt(fightPanel, "Attack", golden, Color.BLACK);
+    attack = butt(fightPanel, "Attack", lightContrast, Color.BLACK);
     attack.setFont(new Font("Roboto", Font.BOLD, 25));
 
     // creating and set of shop button
     JButton shop = new JButton();
-    shop = butt(fightPanel, "Shop", golden, Color.BLACK);
+    shop = butt(fightPanel, "Shop", lightContrast, Color.BLACK);
     shop.setFont(new Font("Roboto", Font.BOLD, 25));
 
     // setting to visible
@@ -456,12 +456,12 @@ public class GUI implements ActionListener {
     // setting shop panel parameters
     shopPanel = panel(mainFrame, 400, 500);
     shopPanel.setLayout(OneCol);
-    shopPanel.setBackground(deepBlue);
+    shopPanel.setBackground(background);
 
     // setting buy panel parameters
     buyPanel = panel(mainFrame, 400, 500);
     buyPanel.setLayout(TwoCol);
-    buyPanel.setBackground(deepBlue);
+    buyPanel.setBackground(background);
 
     // displaying the amount of gold user has
     labl(shopPanel, "Current Gold: " + Main.you.getGold(), 22);
@@ -478,26 +478,26 @@ public class GUI implements ActionListener {
 
     // creation and setting of the damage and health buy buttons
     JButton damage = new JButton();
-    damage = butt(buyPanel, "Damage + 1", golden, Color.BLACK);
+    damage = butt(buyPanel, "Damage + 1", lightContrast, Color.BLACK);
     JButton health = new JButton();
-    health = butt(buyPanel, "Health + 3", golden, Color.BLACK);
+    health = butt(buyPanel, "Health + 3", lightContrast, Color.BLACK);
 
     // setting standard colours for buttons
-    health.setBackground(golden);
-    damage.setBackground(golden);
+    health.setBackground(lightContrast);
+    damage.setBackground(lightContrast);
 
     // if they cannot buy, it will be a lighter version
     if (Main.you.getGold() < 5) {
-      health.setBackground(pale);
+      health.setBackground(bright);
       if (Main.you.getGold() < 1) {
-        damage.setBackground(pale);
+        damage.setBackground(bright);
       }
     }
     damage.setForeground(Color.BLACK);
 
     // creation of the button to send you back to fighting
     JButton fight = new JButton();
-    fight = butt(shopPanel, "Fight", golden, Color.BLACK);
+    fight = butt(shopPanel, "Fight", lightContrast, Color.BLACK);
     fight.setFont(new Font("Roboto", Font.BOLD, 25));
 
     // set to true for UI update
@@ -515,7 +515,7 @@ public class GUI implements ActionListener {
     // setting of the panel parameters
     defeatPanel = panel(mainFrame, 400, 500);
     defeatPanel.setLayout(OneByOne);
-    defeatPanel.setBackground(deepBlue);
+    defeatPanel.setBackground(background);
 
     // displaying death message
     labl(defeatPanel, "You died.");
@@ -523,7 +523,7 @@ public class GUI implements ActionListener {
 
     // display play again button to play again
     JButton play_again = new JButton();
-    play_again = butt(defeatPanel, "Play Again", golden, Color.BLACK);
+    play_again = butt(defeatPanel, "Play Again", lightContrast, Color.BLACK);
 
     // Display exit button
     JButton exit = new JButton();
@@ -537,20 +537,20 @@ public class GUI implements ActionListener {
 
     // creation of a subPanel for looks
     JPanel buttonPanel = new JPanel();
-    buttonPanel.setBackground(darkerBlue);
+    buttonPanel.setBackground(darkBack);
 
     // parameter setting of choice panel
     choicePanel = panel(mainFrame, 500, 500);
     choicePanel.setLayout(OneByOne);
-    choicePanel.setBackground(deepBlue);
+    choicePanel.setBackground(background);
 
     // creation and setting of join button
     JButton join = new JButton();
-    join = butt(buttonPanel, "Join", golden, Color.BLACK);
+    join = butt(buttonPanel, "Join", lightContrast, Color.BLACK);
 
     // creation and setting of refuse button
     JButton refuse = new JButton();
-    refuse = butt(buttonPanel, "Refuse", golden, Color.BLACK);
+    refuse = butt(buttonPanel, "Refuse", lightContrast, Color.BLACK);
 
     // story development
     labl(choicePanel, "You're about to slay the bear before he utters: ");
@@ -572,7 +572,7 @@ public class GUI implements ActionListener {
     // setting of panel parameters
     refusePanel = panel(mainFrame, 700, 400);
     refusePanel.setLayout(OneByOne);
-    refusePanel.setBackground(deepBlue);
+    refusePanel.setBackground(background);
 
     // story development!
     labl(refusePanel, "You’ve accomplished the king’s task");
@@ -587,7 +587,7 @@ public class GUI implements ActionListener {
 
     // creation and settin of Finish button
     JButton next = new JButton();
-    next = butt(refusePanel, "Finish", golden, Color.BLACK);
+    next = butt(refusePanel, "Finish", lightContrast, Color.BLACK);
   }
 
   public static void BearEnd() {
@@ -598,7 +598,7 @@ public class GUI implements ActionListener {
     // setting of panel parameters
     joinPanel = panel(mainFrame, 670, 400);
     joinPanel.setLayout(OneByOne);
-    joinPanel.setBackground(deepBlue);
+    joinPanel.setBackground(background);
 
     // story development!
     labl(joinPanel, "You’ve failed the king’s task.");
@@ -614,7 +614,7 @@ public class GUI implements ActionListener {
 
     // creation and settin of Finish button
     JButton next = new JButton();
-    next = butt(joinPanel, "Finish", golden, Color.BLACK);
+    next = butt(joinPanel, "Finish", lightContrast, Color.BLACK);
   }
 
   public static void BothLose() {
@@ -625,7 +625,7 @@ public class GUI implements ActionListener {
     // setting of main panel
     diePanel = panel(mainFrame, 400, 400);
     diePanel.setLayout(OneByOne);
-    diePanel.setBackground(deepBlue);
+    diePanel.setBackground(background);
 
     // story development!
     labl(diePanel, "You’ve failed the king’s task.");
@@ -637,7 +637,7 @@ public class GUI implements ActionListener {
 
     // creation and set of finish button
     JButton next = new JButton();
-    next = butt(diePanel, "Finish", golden, Color.BLACK);
+    next = butt(diePanel, "Finish", lightContrast, Color.BLACK);
   }
 
   public static void end() {
@@ -648,7 +648,7 @@ public class GUI implements ActionListener {
     // setting of main panel
     endPanel = panel(mainFrame, 400, 300);
     endPanel.setLayout(OneByOne);
-    endPanel.setBackground(deepBlue);
+    endPanel.setBackground(background);
 
     // displaying end message
     labl(endPanel, "Thank you for playing");
@@ -656,11 +656,11 @@ public class GUI implements ActionListener {
 
     // creation and set of play again button
     JButton play_again = new JButton();
-    play_again = butt(endPanel, "Play Again", golden, Color.BLACK);
+    play_again = butt(endPanel, "Play Again", lightContrast, Color.BLACK);
 
     // creation and set of submit score button
     JButton Submit = new JButton();
-    Submit = butt(endPanel, "Submit Score", forest, golden);
+    Submit = butt(endPanel, "Submit Score", darkContrast, lightContrast);
 
     // creation and set of exit button
     JButton exit = new JButton();
@@ -687,14 +687,14 @@ public class GUI implements ActionListener {
     harPanel.setLayout(TwoCol);
 
     // adding colours to subpanels
-    easPanel.setBackground(lighterBlue);
-    medPanel.setBackground(lighterBlue);
-    harPanel.setBackground(lighterBlue);
+    easPanel.setBackground(lightBack);
+    medPanel.setBackground(lightBack);
+    harPanel.setBackground(lightBack);
 
     // Setting difpanel properties
     difPanel = panel(mainFrame, 300, 300);
     difPanel.setLayout(OneCol);
-    difPanel.setBackground(deepBlue);
+    difPanel.setBackground(background);
 
     // adding text explanation
     labl(difPanel, "Please choose a difficulty:");
@@ -707,28 +707,28 @@ public class GUI implements ActionListener {
 
     // creating the button for easy mode
     JButton easy = new JButton();
-    easy = butt(easPanel, "Easy", forest, golden);
+    easy = butt(easPanel, "Easy", darkContrast, lightContrast);
 
     // describing easy mode
     labl(easPanel, "Bear Health of 15.");
 
     // creating button ofr medium mode
     JButton medium = new JButton();
-    medium = butt(medPanel, "Medium", forest, golden);
+    medium = butt(medPanel, "Medium", darkContrast, lightContrast);
 
     // describing medium mode
     labl(medPanel, "Bear Health of 30.");
 
     // creating button for hard mode
     JButton hard = new JButton();
-    hard = butt(harPanel, "Hard", forest, golden);
+    hard = butt(harPanel, "Hard", darkContrast, lightContrast);
 
     // describing hard mode
     labl(harPanel, "Bear Health of 50.");
 
     // adding confirm button to go back to menu
     JButton confirm = new JButton();
-    confirm = butt(difPanel, "Confirm", golden, Color.black);
+    confirm = butt(difPanel, "Confirm", lightContrast, Color.black);
 
     // setting visible to update UI
     difPanel.setVisible(true);
@@ -742,7 +742,7 @@ public class GUI implements ActionListener {
     // Setting difpanel properties
     scorePanel = panel(mainFrame, 300, 300);
     scorePanel.setLayout(OneCol);
-    scorePanel.setBackground(deepBlue);
+    scorePanel.setBackground(background);
 
     // creating subPanels
     JPanel userPanel = new JPanel();
@@ -752,11 +752,11 @@ public class GUI implements ActionListener {
     JPanel diffiPanel = new JPanel();
 
     // setting the colours
-    userPanel.setBackground(lighterBlue);
-    roundPanel.setBackground(lighterBlue);
-    endingPanel.setBackground(lighterBlue);
-    cheatPanel.setBackground(lighterBlue);
-    diffiPanel.setBackground(lighterBlue);
+    userPanel.setBackground(lightBack);
+    roundPanel.setBackground(lightBack);
+    endingPanel.setBackground(lightBack);
+    cheatPanel.setBackground(lightBack);
+    diffiPanel.setBackground(lightBack);
 
     // adding title
     labl(scorePanel, "ScoreBoard Submitter:");
@@ -780,7 +780,7 @@ public class GUI implements ActionListener {
 
     // creating the button for easy mode
     JButton submit = new JButton();
-    submit = butt(scorePanel, "Submit", golden, Color.BLACK);
+    submit = butt(scorePanel, "Submit", lightContrast, Color.BLACK);
 
     // If they already submitted then it should not run it twice, this will let them
     // know
@@ -798,7 +798,7 @@ public class GUI implements ActionListener {
 
     // creating the button to go back to playAgain
     JButton back = new JButton();
-    back = butt(scorePanel, "Back", golden, Color.BLACK);
+    back = butt(scorePanel, "Back", lightContrast, Color.BLACK);
 
     // set visible for UI update
     scorePanel.setVisible(true);
