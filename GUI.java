@@ -781,7 +781,7 @@ public class GUI implements ActionListener {
 
     // adding username input
     labl(userPanel, "Username: ");
-    user = text(userPanel, Main.username);
+    user = text(userPanel, "");
 
     // displaying teh statistics:
     labl(roundPanel, "Rounds: " + Main.rounds);
